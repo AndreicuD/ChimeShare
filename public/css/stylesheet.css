@@ -1,0 +1,92 @@
+.popup {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	z-index: 1;
+}
+.overlay_opaque {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 100vh;
+	width: 100vw;
+	background-color: black;
+	opacity: 50%;
+}
+
+.navbar {
+	font-family: "Bebas Neue", sans-serif;
+}
+.nav-link {
+	font-size:20px;
+}
+
+.page_title {
+	padding: 20px;
+	text-align: center;
+	font-family: "Bebas Neue", sans-serif;
+}
+
+.small_gray_text {
+	color:darkgrey;
+}
+#music_interface {
+	border-top: 1px solid #c4c4c4;
+	border-bottom: 1px solid #c4c4c4;
+}
+.cell {
+	padding: 0;
+	margin: 0;
+	border-width: 1px 1px 0px 0px;
+	border-right-style: solid;
+	border-color:white;
+	border-right-color: #c4c4c4;
+	height:25px;
+}
+.cell.note_8 {
+	border-right-color: #444444;
+}
+.played_col {
+	background-color: #ecf56d;
+}
+.active_cell {
+	background-color: #96D4D4;
+}
+.piano_key {
+	border-width: 0px 1px 1px 1px;
+	border-color: #c4c4c4;
+	border-style: solid;
+}
+.piano_key_black {
+	background-color: black;
+}
+.piano_key_white {
+	background-color: white;
+}
+
+.piano_settings {
+	padding-left: 20%;
+	margin-left: auto;
+	padding-right: 20%;
+	margin-right: auto;
+}
+
+.play_btn {
+	font-family: "Times New Roman", Times, serif;
+	border: none;
+	background-color: transparent;
+	font-size: x-large;
+}
+.shadow_divider {
+	height: 3rem;
+	border: solid rgba(0, 0, 0, .15);
+	border-width: 1px 0 0;
+	box-shadow: inset 0 .5em .5em rgba(0, 0, 0, .1);
+}

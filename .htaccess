@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+  Options +FollowSymlinks
+  Options +Indexes
+  RewriteEngine on
+
+  RewriteBase /infoed2024/ 
+
+  RewriteCond %{SCRIPT_FILENAME} !-f
+  RewriteCond %{SCRIPT_FILENAME} !-d
+
+  RewriteRule ^(.*)$   index.php?uri=/$1    [NC,L,QSA]
+</IfModule>

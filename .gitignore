@@ -1,0 +1,9 @@
+.DS_STORE
+.tmproj
+cookiefile
+**/cookiefile
+*.un~
+.idea
+vendor
+composer.lock
+
