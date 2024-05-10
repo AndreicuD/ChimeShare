@@ -8,4 +8,5 @@
     <!-- this is the footer -->
 </footer>
 <script src="./public/js/bootstrap.bundle.min.js"></script>
-<script src="./public/js/melodyMaker.js"></script>
+<script src="./public/js/tone.js"></script>
+<script src="./public/js/melody.js"></script>
