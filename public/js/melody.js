@@ -37,8 +37,24 @@ const melody = [];
 
 //-----------------------------------------------------------------------------------
 
+const synth = new Tone.Synth().toDestination();
+const now = Tone.now();
+
+function playNote(instrument, note, duration) {
+	//const audio = new Audio();
+	//console.log('./sounds/' + instrument + '/' + note);
+	//audio.src = './sounds/' + instrument + '/' + note;
+	
+	//audio.play();
+	//create a synth and connect it to the main output (your speakers)
+	const synth = new Tone.AMSynth().toDestination();
+	//synth.triggerAttackRelease(note, note_durations.get(duration));
+	synth.triggerAttackRelease(note_array.get('' + note), note_durations.get(duration));
+}
+
+//-----------------------------------------------------------------------------------
+
 var instrument='piano';
-var duration = 0.25;
 var volume = 1;
 
 function change_instrument(instr_name) {
@@ -78,7 +94,7 @@ function check_cell(cell_pressed) {
 		}
 		cell_pressed.dataset.duration = raw_duration;
 
-		//now we give it the class (that makes the button blue) if it doesn't have it
+		//now we give it the class that makes the button blue if it doesn't have it
 		if(raw_duration > 0) {
 			if (!cell_pressed.className.includes("active_cell")) {
 				cell_pressed.className += " active_cell";
@@ -88,53 +104,46 @@ function check_cell(cell_pressed) {
 		}
 
 		//and we re-make the melody array
-
-		//console.log([...melody.entries()]);
+		melody.length = 0;
+		for(var i=1; i<=32; i++) {
+			var current_column_notes = []
+			for(var j=1; j<=24; j++) {
+				var current_index = 'c' + i + 'r' + j;
+				var current_cell = document.getElementById(current_index);
+				if (current_cell.dataset.duration != 0) {
+					current_column_notes.push(current_index);
+				}
+			}
+			if (current_column_notes.length != 0) {
+				melody.push(current_column_notes);
+			}
+		}
+		console.log(melody);
 	}
 
 	//play note
-	playNote(instrument, note_array.get(row), raw_duration);
+	playNote(instrument, row, 0.25);
 }
 
 function erase_table() {
 	for(var i=1; i<=24; i++) {
 		for(var j=1; j<=32; j++) {
 			var temp = document.getElementById('c' + j + 'r' + i);
-			if(melody.get(j)!=null) {
-				var index2 = melody.get(j).indexOf(i);
-				if (index2 > -1) { // only splice array when item is found
-					melody.get(j).splice(index2, 1);
-				}
-				temp.className = temp.className.replace(' active_cell','');
-			}
+			temp.className = temp.className.replace(' active_cell','');
+			temp.dataset.duration = 0;
+			temp.innerText = '';
 		}
 	}
-	//console.log([...melody.entries()]);
+	melody.length = 0;
 	closePopup('erase_popup');
-}
-
-//-----------------------------------------------------------------------------------
-
-const synth = new Tone.Synth().toDestination();
-const now = Tone.now();
-
-function playNote(instrument, note, duration) {
-	//const audio = new Audio();
-	//console.log('./sounds/' + instrument + '/' + note);
-	//audio.src = './sounds/' + instrument + '/' + note;
-	
-	//audio.play();
-	//create a synth and connect it to the main output (your speakers)
-	const synth = new Tone.AMSynth().toDestination();
-	//play a middle 'C' for the duration of an 8th note
-	synth.triggerAttackRelease(note, note_durations.get(duration));
 }
 
 //-----------------------------------------------------------------------------------
 
 var timer;
 var melody_playing = false;
-var pointer_location = 2;
+var playback_pointer = 2;
+var melody_pointer = 0;
 var bpm = 120;
 var time_sign = 4; // aka 4/4
 
@@ -152,9 +161,31 @@ function remove_played_col_class_to(col) {
 		note.className = note.className.replace(' played_col','');
 	}
 }
-function play_col(col) {
-	
+function check_and_play_col(playback_pointer) {
+	var current_cell_id = melody[melody_pointer][0];
+	var check_cell_column_split = current_cell_id.split('c');
+	var check_cell_row_split = check_cell_column_split[1].split('r');
+	var check_cell_col = check_cell_row_split[0];
+	check_cell_col = parseInt(check_cell_col);
+
+	if(check_cell_col == playback_pointer) {
+		for(let note in melody[melody_pointer]) {
+
+			var cell_id = melody[melody_pointer][note];
+			var c_split = cell_id.split('c');
+			var r_split = c_split[1].split('r');
+			col=r_split[0];
+			row=r_split[1];
+			col = parseInt(col);
+			row = parseInt(row);
+			playNote(instrument, row, document.getElementById(melody[melody_pointer][note]).dataset.duration / 4)
+		}
+		if( (melody_pointer+1) != melody.length ) {
+			melody_pointer++;
+		}
+	}
 }
+
 function playMelody() {
 	var play_button = document.getElementById('play_button');
 
@@ -162,33 +193,36 @@ function playMelody() {
 	if (!melody_playing) {
 		play_button.innerHTML = '&#x23F9;';
 		melody_playing = true;
-		pointer_location = 2;
+		playback_pointer = 2;
+		melody_pointer = 0;
 	
 		add_played_col_class_to(1);
-		play_col(1);
+		check_and_play_col(1);
 		remove_played_col_class_to(1);
 		timer = setInterval(play_notes, note_speed);
 	} else {
 		play_button.innerHTML = '&#x25B6;';
-		remove_played_col_class_to(pointer_location);
+		remove_played_col_class_to(playback_pointer);
 		clearInterval(timer);
-		pointer_location = 1;
+		playback_pointer = 1;
 		melody_playing = false;
 		//timer = setInterval(play_notes, note_speed);
 	}
 
 	function play_notes() {
-		if (pointer_location == 33) {
+		if (playback_pointer == 33) {
 				remove_played_col_class_to(33);
-				pointer_location=2;
+				playback_pointer=2;
+				melody_pointer = 0;
 				clearInterval(timer);
 				melody_playing = false;
+				play_button.innerHTML = '&#x25B6;';
 			} else {
-				add_played_col_class_to(pointer_location);
-				play_col(pointer_location);
-				remove_played_col_class_to(pointer_location);
+				add_played_col_class_to(playback_pointer);
+				check_and_play_col(playback_pointer);
+				remove_played_col_class_to(playback_pointer);
 			}
-			pointer_location++;
+			playback_pointer++;
 		}
 }
 
