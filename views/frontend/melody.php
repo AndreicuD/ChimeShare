@@ -47,9 +47,9 @@ $button_classes= "";
             </button>
             <ul class="dropdown-menu">
                 <li><a id="piano_drop" class="dropdown-item active user-select-none" onclick="change_instrument('piano')">Piano</a></li>
-                <li><a id="organ_drop" class="dropdown-item user-select-none" onclick="change_instrument('organ')">Organ</a></li>
-                <li><a id="acoustic_drop" class="dropdown-item user-select-none" onclick="change_instrument('acoustic')">Acoustic</a></li>
-                <li><a id="edm_drop" class="dropdown-item user-select-none" onclick="change_instrument('edm')">Edm</a></li>
+                <li><a id="am_synth_drop" class="dropdown-item user-select-none" onclick="change_instrument('am_synth')">AMSynth</a></li>
+                <li><a id="fm_synth_drop" class="dropdown-item user-select-none" onclick="change_instrument('fm_synth')">FMSynth</a></li>
+                <li><a id="fat_osc_drop" class="dropdown-item user-select-none" onclick="change_instrument('fat_osc')">Fat Oscillator</a></li>
             </ul>
         </div>
         <div class="input-group pe-2" role="group">

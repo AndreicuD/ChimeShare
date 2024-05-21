@@ -1,35 +1,35 @@
 const note_array = new Map([
-    ["24", "C4"],
-    ["23", "C#4"],
-    ["22", "D4"],
-    ["21", "D#4"],
-    ["20", "E4"],
-    ["19", "F4"],
-    ["18", "F#4"],
-    ["17", "G4"],
-    ["16", "G#4"],
-    ["15", "A4"],
-    ["14", "A#4"],
-    ["13", "B4"],
+    [24, "C4"],
+    [23, "C#4"],
+    [22, "D4"],
+    [21, "D#4"],
+    [20, "E4"],
+    [19, "F4"],
+    [18, "F#4"],
+    [17, "G4"],
+    [16, "G#4"],
+    [15, "A4"],
+    [14, "A#4"],
+    [13, "B4"],
     
-    ["12", "C5"],
-    ["11", "C#5"],
-    ["10", "D5"],
-    ["9", "D#5"],
-    ["8", "E5"],
-    ["7", "F5"],
-    ["6", "F#5"],
-    ["5", "G5"],
-    ["4", "G#5"],
-    ["3", "A5"],
-    ["2", "A#5"],
-    ["1", "B5"],
+    [12, "C5"],
+    [11, "C#5"],
+    [10, "D5"],
+    [9, "D#5"],
+    [8, "E5"],
+    [7, "F5"],
+    [6, "F#5"],
+    [5, "G5"],
+    [4, "G#5"],
+    [3, "A5"],
+    [2, "A#5"],
+    [1, "B5"],
 ]);
 const note_durations = new Map ([
 	[0, '0'],
-	[0.25, '8n'],
-	[0.5, '4n'],
-	[0.75, '2n'],
+	[0.25, '16n'],
+	[0.5, '8n'],
+	[0.75, '4n'],
 	[1, '1n']
 ]);
 
@@ -37,19 +37,87 @@ const melody = [];
 
 //-----------------------------------------------------------------------------------
 
-const synth = new Tone.Synth().toDestination();
 const now = Tone.now();
+const vol = new Tone.Volume().toDestination();
+
+const am_synth = new Tone.Synth({
+	"volume": 0,
+	"detune": 0,
+	"portamento": 0,
+	"harmonicity": 2.5,
+	"oscillator": {
+		"partialCount": 0,
+		"partials": [],
+		"phase": 0,
+		"type": "fatsawtooth",
+		"count": 3,
+		"spread": 20
+	},
+	"envelope": {
+		"attack": 0.1,
+		"attackCurve": "linear",
+		"decay": 0.2,
+		"decayCurve": "exponential",
+		"release": 0.3,
+		"releaseCurve": "exponential",
+		"sustain": 0.2
+	},
+	"modulation": {
+		"partialCount": 0,
+		"partials": [],
+		"phase": 0,
+		"type": "square"
+	},
+	"modulationEnvelope": {
+		"attack": 0.5,
+		"attackCurve": "linear",
+		"decay": 0.01,
+		"decayCurve": "exponential",
+		"release": 0.5,
+		"releaseCurve": "exponential",
+		"sustain": 1
+	}
+}).toDestination();
+const fm_synth = new Tone.FMSynth().toDestination();
+const piano = new Tone.Sampler({
+	urls: {
+		C4 : 'piano/C4.mp3',
+		'D#4' : 'piano/Dsharp4.mp3',
+		'F#4' : 'piano/Fsharp4.mp3',
+		A4 : 'piano/A4.mp3',
+		C5 : 'piano/C5.mp3',
+		'D#5' : 'piano/Dsharp5.mp3',
+		'F#5' : 'piano/Fsharp5.mp3',
+		A5 : 'piano/A5.mp3'
+	},
+	release : 1,
+	baseUrl : './public/sounds/'
+}).toDestination();
+const fat_osc = new Tone.FatOscillator("Ab3", "sawtooth", 40).toDestination()
+
+const am_synths = [];
+const fm_synths = [];
+const fat_oscillators = [];
+const pianos = [];
 
 function playNote(instrument, note, duration) {
-	//const audio = new Audio();
-	//console.log('./sounds/' + instrument + '/' + note);
-	//audio.src = './sounds/' + instrument + '/' + note;
-	
-	//audio.play();
-	//create a synth and connect it to the main output (your speakers)
-	const synth = new Tone.AMSynth().toDestination();
-	//synth.triggerAttackRelease(note, note_durations.get(duration));
-	synth.triggerAttackRelease(note_array.get('' + note), note_durations.get(duration));
+	console.log(instrument);
+	let chosen_instrument = am_synths[note-1];
+	switch (instrument) {
+		case 'piano':
+			chosen_instrument = pianos[note-1];
+			break;
+		case 'am_synth':
+			chosen_instrument = am_synths[note-1];
+			break;
+		case 'fm_synth':
+			chosen_instrument = fm_synths[note-1];
+			break;
+		case 'fat_osc':
+			chosen_instrument = fat_oscillators[note-1];
+			break;
+	}
+	chosen_instrument.triggerAttackRelease(note_array.get(note), note_durations.get(duration), Tone.now());
 }
 
 //-----------------------------------------------------------------------------------
@@ -68,6 +136,7 @@ function change_instrument(instr_name) {
 }
 
 function check_cell(cell_pressed) {
+	Tone.start();
 	//split the input string "cXrY", where X and Y are numbers, into two different variables;
 	//basically extracting the numbers
 	cell_id = cell_pressed.id;
@@ -118,7 +187,7 @@ function check_cell(cell_pressed) {
 				melody.push(current_column_notes);
 			}
 		}
-		console.log(melody);
+		//console.log(melody);
 	}
 
 	//play note
@@ -231,14 +300,14 @@ function playMelody() {
 function change_bpm_by(i) {
 	document.getElementById("bpm").value = parseInt(document.getElementById("bpm").value) + i;
 	bpm = document.getElementById("bpm").value;
-	Tone.bpm = bpm;
+	Tone.Transport.bpm.value = bpm;
 }
 
 function update_volume() {
 	volume = parseInt( document.getElementById('volume_slider').value );
 	document.getElementById('volume_text').innerText = volume;
 	volume = volume/100;
-	Tone.bpm = bpm;
+	vol.volume = volume;
 }
 
 //-----------------------------------------------------------------------------------
@@ -322,6 +391,14 @@ function initialize_site() {
 	Tone.start();
 	update_volume();
 	change_bpm_by(0);
+
+	for (let i = 0; i < 24; i++) {
+		am_synths.push(am_synth);
+		fm_synths.push(fm_synth);
+		pianos.push(piano);
+		fat_oscillators.push(fat_osc);
+	  }
+	  vol.toDestination();
 }
 
 window.onload = initialize_site;
