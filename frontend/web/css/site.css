@@ -1,0 +1,186 @@
+main > .container, main > .container-fluid
+{
+    padding: 20px 15px 20px;
+}
+
+.footer {
+    background-color: #f5f5f5;
+    font-size: .9em;
+    height: 60px;
+}
+
+.footer > .container, .footer > .container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    content: '';
+    left: 3px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: solid 5px transparent;
+    margin: 4px 4px 2px 4px;
+    background: transparent;
+}
+
+a.asc:after {
+    border-bottom: solid 7px #212529;
+    border-top-width: 0;
+}
+
+a.desc:after {
+    border-top: solid 7px #212529;
+    border-bottom-width: 0;
+}
+
+.grid-view th,
+.grid-view td:last-child {
+    white-space: nowrap;
+}
+
+.grid-view .filters input,
+.grid-view .filters select {
+    min-width: 50px;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+/* align the logout "link" (button in form) of the navbar */
+.navbar form > button.logout {
+    padding-top: 7px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+header .navbar-brand {
+    padding: 0;
+}
+header .navbar-brand img {
+    max-height: 60px;
+}
+
+@media(max-width:767px) {
+    .navbar form > button.logout {
+        display:block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 0;
+    }
+}
+
+.navbar form > button.logout:focus,
+.navbar form > button.logout:hover {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.navbar form > button.logout:focus {
+    outline: none;
+}
+
+/* style breadcrumb widget as in previous bootstrap versions */
+.breadcrumb {
+    background-color: var(--bs-gray-200);
+    border-radius: .25rem;
+    padding: .75rem 1rem;
+}
+
+.breadcrumb-item > a
+{
+    text-decoration: none;
+}
+
+
+/**** music grid ****/
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 1;
+}
+.overlay_opaque {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+    opacity: 50%;
+}
+
+.small_gray_text {
+    color:darkgrey;
+}
+#music_interface {
+    border-top: 1px solid #c4c4c4;
+    border-bottom: 1px solid #c4c4c4;
+}
+.cell {
+    padding: 0;
+    margin: 0;
+    border-width: 1px 1px 0px 0px;
+    border-right-style: solid;
+    border-color:white;
+    border-right-color: #c4c4c4;
+    height:25px;
+}
+.cell.note_8 {
+    border-right-color: #444444;
+}
+.played_col {
+    background-color: #ecf56d;
+}
+.active_cell {
+    background-color: #96D4D4;
+}
+.piano_key {
+    border-width: 0px 1px 1px 1px;
+    border-color: #c4c4c4;
+    border-style: solid;
+}
+.piano_key_black {
+    background-color: black;
+}
+.piano_key_white {
+    background-color: white;
+}
+
+.piano_settings {
+    padding-left: 20%;
+    margin-left: auto;
+    padding-right: 20%;
+    margin-right: auto;
+}
+
+.play_btn {
+    font-family: "Times New Roman", Times, serif;
+    border: none;
+    background-color: transparent;
+    font-size: x-large;
+}
