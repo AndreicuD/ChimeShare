@@ -20,6 +20,10 @@ Each chime you make has the option to be shown to the public, where it can gathe
 
 <h2>A short history</h2>
 
+Right now the project is based on the [Yii](https://www.yiiframework.com/) PHP framework and the [Tone.js](https://tonejs.github.io/) library, for sounds.
+
+----------------
+
 This website was originally written only in HTML, CSS, JavaScript and a bit of PHP, but as time went on and new features were added, I realized this was not going to be enough.
 
 The next logical step was to port the project to a PHP micro-framework, [Limonade](http://limonade-php.github.io/), that took care of the routing and views of the site. With this change made, I also took the
