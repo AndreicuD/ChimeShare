@@ -31,7 +31,7 @@ time to upgrade the sound-part of the project. Before, each sound was an mp3 fil
 You can imagine that this was very tedious, and it wasn't even perfoming great. 
 
 The new implementation was based around [audiosynth](https://github.com/keithwhor/audiosynth), by Keithwhor, but I soon found out
-that this also wasn't able to playmultiple notes simultaneously. The fact that JavaScript is a single-threaded language, made the implementation of polyphony very hard to achieve by myself, so I knew that finding a new library was a must.
+that this also wasn't able to play multiple notes simultaneously. The fact that JavaScript is a single-threaded language, made the implementation of polyphony very hard to achieve by myself, so I knew that finding a new library was a must.
 
 Here's when [Tone.js](https://tonejs.github.io/) comes into play. This library takes care of the note polyphony situation, and is also able to generate instrument sounds on the go. This means that the sounds are made based on
 different variables that I can change easily, without needing to redo any files myself. This also means that, in the future, I can add a feature that lets users make their own instruments, or sample different sound of their own.
