@@ -57,7 +57,7 @@ $this->title = 'About';
         <h2>Documentation and technologies</h2>
 
         <p>More information about the technologies used can be found on 
-        the <a href="https://github.com/AndreicuD/ChimeShare/blob/7c6c30df225080a1d269dcb2912a338fc12bed77/docs/documentation.md" target="_blank">documentation</a>.</p>
+        the <a href="https://github.com/AndreicuD/ChimeShare/blob/main/docs/documentation.md" target="_blank">documentation</a>.</p>
 
     </div>
 
