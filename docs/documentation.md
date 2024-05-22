@@ -63,7 +63,7 @@ Probleme pot aparea insa atunci cand se doreste crearea unei melodii de pe telef
 
 Structura pentru un utilizator fara cont (guest) este un simpla, asemenea majoritatii site-urilor de pe internet.
 
-![a photo of the navbar, for an guest user](https://github.com/AndreicuD/ChimeShare/assets/78648231/4b54ae45-7541-475d-b58a-26922e38aed1)
+![a photo of the navbar, for an guest user](https://github.com/AndreicuD/ChimeShare/assets/78648231/4ac374a8-80e9-4e64-8034-e3bc9fe9c796)
 
 Utilizatorul are acces la prima pagina, de unde poate asculta ultimele melodii urcate, sau melodiile cele mai apreciate de comunitate, dar si la paginile 'About' si 'Contact'.
 
@@ -76,7 +76,7 @@ Dupa ce utilizatorul isi face cont, el primeste dreptul de a:
 
 Asa arata noua lui bara de navigatie:
 
-![a photo of the new navbar, after the user logins](https://github.com/AndreicuD/ChimeShare/assets/78648231/ad041128-d708-4808-8b53-aa4676b0b2a4)
+![a photo of the new navbar, after the user logins](https://github.com/AndreicuD/ChimeShare/assets/78648231/f635553c-cf4e-408f-85f0-0bbfe4422e14)
 
 Pentru a isi crea propria melodie utilizatorul trebuie sa ajunga la pagina 'My Chimes' de unde va apasa butonul 'Create Chime', care il va duce pe aceasta pagina:
 
