@@ -1,5 +1,6 @@
 <?php
 
+$this->registerJsFile('/js/tone.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->registerJsFile('/js/melodyMaker.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
 // the number of columns in the grid
@@ -37,20 +38,20 @@ $button_classes= "";
     <?php } ?>
 </div>
 
-<div id="bottom_settings" class="mb-3 p-0 pt-3">
+<div id="bottom_settings" class="container mb-3 p-0 pt-3">
     <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Bottom toolbar">
         <div class="btn-group me-auto" role="group">
-            <button class="play_btn" id="play_button" onclick="playMelody()">&#x25B6;</button>
+                <button class="play_btn" id="play_button" onclick="playMelody()">&#x25B6;</button>
         </div>
         <div class="input-group pe-2">
             <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 Instrument
             </button>
             <ul class="dropdown-menu">
-                <li><a id="piano_drop" class="dropdown-item active user-select-none" onclick="change_instrument('piano')">Piano</a></li>
-                <li><a id="organ_drop" class="dropdown-item user-select-none" onclick="change_instrument('organ')">Organ</a></li>
-                <li><a id="acoustic_drop" class="dropdown-item user-select-none" onclick="change_instrument('acoustic')">Acoustic</a></li>
-                <li><a id="edm_drop" class="dropdown-item user-select-none" onclick="change_instrument('edm')">Edm</a></li>
+                <li><a id="piano_drop" class="dropdown-item user-select-none" onclick="change_instrument('piano')">Piano</a></li>
+                <li><a id="am_synth_drop" class="dropdown-item user-select-none active" onclick="change_instrument('am_synth')">AMSynth</a></li>
+                <li><a id="fm_synth_drop" class="dropdown-item user-select-none" onclick="change_instrument('fm_synth')">FMSynth</a></li>
+                <li><a id="fat_osc_drop" class="dropdown-item user-select-none" onclick="change_instrument('fat_osc')">Fat Oscillator</a></li>
             </ul>
         </div>
         <div class="input-group pe-2" role="group">

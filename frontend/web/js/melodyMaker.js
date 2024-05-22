@@ -38,7 +38,7 @@ const melody = [];
 //-----------------------------------------------------------------------------------
 
 const now = Tone.now();
-const vol = new Tone.Volume().toDestination();
+const vol = new Tone.Volume(-16).toDestination();
 
 const am_synth = new Tone.Synth({
 	"volume": 0,
@@ -77,8 +77,8 @@ const am_synth = new Tone.Synth({
 		"releaseCurve": "exponential",
 		"sustain": 1
 	}
-}).toDestination();
-const fm_synth = new Tone.FMSynth().toDestination();
+}).connect(vol).toDestination();
+const fm_synth = new Tone.FMSynth().connect(vol).toDestination();
 const piano = new Tone.Sampler({
 	urls: {
 		C4 : 'piano/C4.mp3',
@@ -91,9 +91,9 @@ const piano = new Tone.Sampler({
 		A5 : 'piano/A5.mp3'
 	},
 	release : 1,
-	baseUrl : './frontend/web/sounds/',
-}).toDestination();
-const fat_osc = new Tone.FatOscillator("Ab3", "sawtooth", 40).toDestination()
+	baseUrl : '/sounds/',
+}).connect(vol).toDestination();
+const fat_osc = new Tone.FatOscillator("Ab3", "sawtooth", 40).connect(vol).toDestination();
 
 const am_synths = [];
 const fm_synths = [];
@@ -101,7 +101,7 @@ const fat_oscillators = [];
 const pianos = [];
 
 function playNote(instrument, note, duration) {
-	console.log(instrument);
+	//console.log(instrument);
 	let chosen_instrument = am_synths[note-1];
 	switch (instrument) {
 		case 'piano':
@@ -122,17 +122,20 @@ function playNote(instrument, note, duration) {
 
 //-----------------------------------------------------------------------------------
 
-var instrument='piano';
+var instrument='am_synth';
 var volume = 1;
 
 function change_instrument(instr_name) {
-	var temp = document.getElementById(instrument+'_drop');
+	var id = instrument+'_drop';
+	var temp = document.getElementById(id);
 	if(temp.className.includes('active')) {
 		temp.className = temp.className.replace('active', '');
 	}
-	temp = document.getElementById(instr_name+'_drop');
+	id = instr_name + '_drop';
+	temp = document.getElementById(id);
 	temp.className += 'active';
     instrument = instr_name;
+	console.log(instrument);
 }
 
 function check_cell(cell_pressed) {
@@ -306,8 +309,8 @@ function change_bpm_by(i) {
 function update_volume() {
 	volume = parseInt( document.getElementById('volume_slider').value );
 	document.getElementById('volume_text').innerText = volume;
-	volume = volume/100;
-	vol.volume = volume;
+	//volume = volume/100;
+	//vol.volume = volume;
 }
 
 //-----------------------------------------------------------------------------------
@@ -398,7 +401,6 @@ function initialize_site() {
 		pianos.push(piano);
 		fat_oscillators.push(fat_osc);
 	  }
-	  vol.toDestination();
 }
 
 window.onload = initialize_site;

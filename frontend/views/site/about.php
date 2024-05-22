@@ -8,7 +8,7 @@ $this->title = 'About';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <class="site-about">
-    <h1 style="text-align: center;"><?= Html::encode($this->title) ?></h1>
+    <h1 style="text-align: center;" class="page_title"><?= Html::encode($this->title) ?></h1>
 
     <div class="about-text" style="padding-left: 20%; padding-right:20%;">
         <h3 style="text-align: center;">ChimeShare is an online web project dedicated to making music accesible to everyone, with a social twist. </h3>
@@ -50,12 +50,14 @@ $this->title = 'About';
         without needing to redo any files myself. This also means that, in the future, I can add a feature that lets users make their own instruments, or sample
         different sound of their own.</p>
     
-        For this change to be possible, I rerwrote, for the third time, the entire backend for the <b>Chime Maker</b> page, changing the way the notes are stored in the background on the user machine, and later on the data-base.
-        With this new structure design, I am also able to store different lenghts for notes, enabling endless posibilities! (theoretically 2 to the power of 3072, but who's counting :] It's still a lot )
+        <p>For this change to be possible, I rerwrote, for the third time, the entire backend for the <b>Chime Maker</b> page, changing the way the notes are
+        stored in the background on the user machine, and later on the data-base. With this new structure design, I am also able to store different lenghts for
+        notes, enabling endless posibilities! (theoretically 2 to the power of 3072, but who's counting :] It's still a lot )</p>
     
         <h2>Documentation and technologies</h2>
-    
-        More information about the technologies used can be found on the [documentation](documentation.md).
+
+        <p>More information about the technologies used can be found on 
+        the <a href="https://github.com/AndreicuD/ChimeShare/blob/7c6c30df225080a1d269dcb2912a338fc12bed77/docs/documentation.md" target="_blank">documentation</a>.</p>
 
     </div>
 

@@ -10,6 +10,7 @@ $this->title = 'My chimes | Chime Share';
 //$this->params['breadcrumbs'][] = Yii::t('app', 'My chimes');
 ?>
 <div class="chime-index">
+    <h1 style="text-align: center;" class="page_title">My Chimes</h1>
     <div class="container my-3">
         <div class="row">
             <div class="col-12">

@@ -12,7 +12,7 @@ $this->title = 'Contact';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-contact">
-    <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
+    <h1 class="page_title" style="text-align: center;"><?= Html::encode($this->title) ?></h1>
 
     <p class="text-center">
         For any questions regarding this project, please contact us using by filling the form below. Thank you.
