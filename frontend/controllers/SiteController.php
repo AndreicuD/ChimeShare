@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use frontend\models\ContactForm;
 use Yii;
 use yii\web\Controller;
+use common\models\Chime;
 
 /**
  * Site controller
@@ -35,7 +36,22 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $searchModel = new Chime();
+        $latestDataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $latestDataProvider->pagination->pageParam = 'p';
+        $latestDataProvider->query->orderBy(['id' => SORT_DESC]);
+        $latestDataProvider->query->limit(8);
+
+        $searchModel2 = new Chime();
+        $bestDataProvider = $searchModel2->search(Yii::$app->request->queryParams);
+        $bestDataProvider->pagination->pageParam = 'p';
+        $bestDataProvider->query->orderBy(['likes_count' => SORT_DESC]);
+        $bestDataProvider->query->limit(8);
+
+        return $this->render('index', [
+            'latestDataProvider' => $latestDataProvider,
+            'bestDataProvider' => $bestDataProvider,
+        ]);
     }
 
     /**
