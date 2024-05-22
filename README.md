@@ -41,4 +41,4 @@ With this new structure design, I am also able to store different lenghts for no
 
 <h2>Documentation and technologies</h2>
 
-More information about the technologies used can be found on the [documentation](documentation.md).
+More information about the technologies used can be found on the [documentation](docs/documentation.md).
