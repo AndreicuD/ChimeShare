@@ -1,8 +1,9 @@
 <?php
 
 /** @var yii\web\View $this */
-@var $dataProvider yii\data\ActiveDataProvider;
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
+use yii\bootstrap5\Html;
 use yii\widgets\ListView;
 
 $this->title = 'Chime Share';
@@ -25,33 +26,11 @@ $this->title = 'Chime Share';
     <div class="shadow_divider"></div>
     <div class="container my-3">
         <div class="row">
-            <div class="col-md-6">
-                <?= ListView::widget([
-                    'dataProvider' => $dataProvider,
-                    'itemView' => '_item',
-                    'options' => [
-                        'tag' => 'div',
-                        'class' => 'list-wrapper row',
-                    ],
-                    'itemOptions' => [
-                        'tag' => 'div',
-                        'class' => 'col-12',
-                    ],
-                    'layout' => '{items}{pager}',
-                    'pager' => [
-                        'pageCssClass' => 'page-item',
-                        'prevPageCssClass' => 'prev page-item',
-                        'nextPageCssClass' => 'next page-item',
-                        'firstPageCssClass' => 'first page-item',
-                        'lastPageCssClass' => 'last page-item',
-                        'linkOptions' => ['class' => 'page-link'],
-                        'disabledListItemSubTagOptions' => ['class' => 'page-link'],
-                        'options' => ['class' => 'pagination justify-content-center'],
-                    ],
-                ]); ?>
+            <div class="col-md-6">  
+                <h2 class="page_title">Top Chimes</h2>
             </div>
             <div class="col-md-6">
-                <p>altceva</p>
+            <h2 class="page_title">Latest Chimes</h2>
             </div>
         </div>
     </div>
