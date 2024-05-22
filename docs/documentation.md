@@ -40,6 +40,26 @@ Acest proiect este bazat pe frameworkul de PHP [Yii](https://www.yiiframework.co
 - Server Apache
 - MariaDB
 
-<h1>EN</h1>
+## Paginile si structura site-ului:
 
-The project is based on the [Yii](https://www.yiiframework.com/) PHP framework and the [Tone.js](https://tonejs.github.io/) library, for sounds
+Structura pentru un utilizator fara cont (guest) este un simpla, asemenea majoritatii site-urilor de pe internet.
+
+![image](https://github.com/AndreicuD/ChimeShare/assets/78648231/4b54ae45-7541-475d-b58a-26922e38aed1)
+
+Utilizatorul are acces la prima pagina, de unde poate asculta ultimele melodii urcate, sau melodiile cele mai apreciate de comunitate, dar si la paginile 'About' si 'Contact'.
+
+![Screenshot 2024-05-22 220200](https://github.com/AndreicuD/ChimeShare/assets/78648231/dc6cefe5-c5b5-4795-b8d6-d44fc40f7650)
+
+Dupa ce utilizatorul isi face cont, el primeste dreptul de a:
+
+1. Isi arata aprecierea pentru melodia altui utilizator
+2. Isi face propriile melodii
+
+Asa arata noua lui bara de navigatie:
+
+![Screenshot 2024-05-22 220319](https://github.com/AndreicuD/ChimeShare/assets/78648231/ad041128-d708-4808-8b53-aa4676b0b2a4)
+
+Pentru a isi crea propria melodie utilizatorul trebuie sa ajunga la pagina 'My Chimes' de unde va apasa butonul 'Create Chime', care il va duce pe aceasta pagina:
+
+![Screenshot 2024-05-22 220728](https://github.com/AndreicuD/ChimeShare/assets/78648231/3b1297e6-ae26-4404-908d-ed717b141681)
+
