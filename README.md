@@ -3,6 +3,11 @@
     <h1 align="center">ChimeShare</h1>
 </p>
 
+Proiect realizat sub îndrumarea:
+* Prof. Carmen Nicoleta Mincă
+* Prof. Simona Ionescu
+* Prof. Magdalena Rădulescu
+
 <h2 align="center">RO</h2>
 <h3 align="center">ChimeShare este un proiect web online care încearcă să facă muzica accesibilă pentru toată lumea, cu un twist social.</h3>
 <br>
