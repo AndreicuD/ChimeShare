@@ -87,3 +87,29 @@ Aici utilizatorul poate crea propriile melodii, el putand sa le asculte la difer
 El poate alegea de asemenea sa salveze melodia, dupa terminarea acesteia, moment in care are de completat un formular.
 
 Utilizatorul este liber sa aleaga daca isi doreste ca melodia lui sa fie publica, moment in care apare si pe prima pagina, la sectiunea 'Latest Chimes', sau sa o pastreze privata.
+
+
+### Cum functioneaza in fundal:
+
+-------------------------------
+
+Gridul in care utilizatorul isi face muzica este de fapt generat pe loc cu ajutorul php-ului, in functie de anumite variabile decise de mine (lucru care imi permite pe viitor sa
+extind tot proiectul, sau poate chiar sa il fac compatibil cu mai multe instrumente in acelasi timp). Fiecaruia din aceste butoane ii este dat un id unic, care urmeaza regula:
+"c_r_", unde 'c' vine de la 'column/coloana', iar 'r' de la 'row/rand'. Fiecare buton are de asemeanea o legatura 'onclick' la o functie JavaScript care sparge id-ul
+pentru a recunoaste exact ce nota are nevoie sa cante (in functie de randul in care se afla), iar care mai apoi genereaza un obiect care tine toate informatiile melodiei, a
+notelor cantate. Astfel, acest obiect poate fi foarte usor salvat sub forma <b>JSON</b>, pentru a fi salvat eficient intr-o baza de date.
+
+Fiecarei melodii ii este atribuita, pe langa lucrurile de baza, precum un nume si un owner, si un id public, diferit fata de cel din baza de date. Acest lucru va permite
+deschiderea pentru ascultare a melodiilor altor persoane pe baza unui simplu link, care poate fi distribuit usor si care va contine acel id public in structura lui.
+
+In plus, fiecare melodie publica are de asemenea si un contor de like-uri, lucru care permite formarea acelei liste cu cele mai bune melodii pe care o gasim pe prima pagina
+si care aduce elemente asemanatoare unui 'social media' pe platforma.
+
+### Planuri de viitor:
+
+-------------------------------
+
+Imi doresc sa aduc pe platforma cat mai multe elemente sociale in viitor. Vreau, de exemplu, sa poti deschide pagina unui alt utilizator ca sa explorezi toate melodiile lui
+publice, sa poti sa oferi like-uri, sa poti sa il urmaresti pe platforma, astfel aratandu-ti aprecierea. Structura proiectului in prezent permite dezvoltarea acestor functii
+cu usurinta, astfel ca lista de melodii ale unui utilizator este strans legata de acesta si poate fi astfel extrasa din baza de date cu foarte putine interogari, fiind totul
+foarte rapid.
