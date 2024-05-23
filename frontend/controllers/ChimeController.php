@@ -79,7 +79,7 @@ class ChimeController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', 'The chime has been created.');
-            return $this->redirect(['chime/update', 'id' => $model->public_id]);
+            $this->redirect(['chime/index']);
         }
 
         return $this->render('create' ,[
@@ -98,7 +98,7 @@ class ChimeController extends Controller
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             Yii::$app->session->setFlash('success', 'The chime has been updated.');
-            return $this->refresh();
+            $this->refresh();
         } else {
             Yii::$app->session->setFlash('error', 'There was an error saving the chime.');
         }
