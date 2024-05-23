@@ -51,8 +51,8 @@ $button_classes= "";
                 Instrument
             </button>
             <ul class="dropdown-menu">
-                <li><a id="piano_drop" class="dropdown-item user-select-none" onclick="change_instrument('piano')">Piano</a></li>
-                <li><a id="am_synth_drop" class="dropdown-item user-select-none active" onclick="change_instrument('am_synth')">AMSynth</a></li>
+                <li><a id="piano_drop" class="dropdown-item user-select-none active" onclick="change_instrument('piano')">Piano</a></li>
+                <li><a id="am_synth_drop" class="dropdown-item user-select-none" onclick="change_instrument('am_synth')">AMSynth</a></li>
                 <li><a id="fm_synth_drop" class="dropdown-item user-select-none" onclick="change_instrument('fm_synth')">FMSynth</a></li>
                 <li><a id="fat_osc_drop" class="dropdown-item user-select-none" onclick="change_instrument('fat_osc')">Fat Oscillator</a></li>
             </ul>

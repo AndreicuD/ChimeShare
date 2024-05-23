@@ -1,8 +1,7 @@
 <?php
 
 use yii\bootstrap5\Html;
-use yii\helpers\HtmlPurifier;
-use Yii\helpers\Url;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $widget yii\widgets\ListView this widget instance */
@@ -14,5 +13,5 @@ use Yii\helpers\Url;
  
 <a class="card mb-3" href="<?= Url::toRoute(['chime/listen', 'id' => $model->public_id]); ?>">
     <div class="title" style="width: 50%; float: left;"><?= Html::encode($model->title) ?></div>
-    <div class="likes_count" style="width: 50%; float: left;"><?= $model->likes_count; ?></div>
+    <div class="likes_count" style="width: 50%; float: left;">Like count: <?= $model->likes_count; ?></div>
 </a>

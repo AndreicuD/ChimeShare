@@ -40,13 +40,15 @@ class SiteController extends Controller
         $latestDataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $latestDataProvider->pagination->pageParam = 'p';
         $latestDataProvider->query->orderBy(['id' => SORT_DESC]);
-        $latestDataProvider->query->limit(8);
+        $latestDataProvider->query->limit(5);
+        $latestDataProvider->query->andFilterWhere(['public' => 1, 'active' => 1]);
 
         $searchModel2 = new Chime();
         $bestDataProvider = $searchModel2->search(Yii::$app->request->queryParams);
         $bestDataProvider->pagination->pageParam = 'p';
         $bestDataProvider->query->orderBy(['likes_count' => SORT_DESC]);
-        $bestDataProvider->query->limit(8);
+        $bestDataProvider->query->limit(5);
+        $bestDataProvider->query->andFilterWhere(['public' => 1, 'active' => 1]);
 
         return $this->render('index', [
             'latestDataProvider' => $latestDataProvider,

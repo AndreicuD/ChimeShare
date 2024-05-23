@@ -124,7 +124,7 @@ function playNote(instrument, note, duration) {
 
 //-----------------------------------------------------------------------------------
 
-var instrument='am_synth';
+var instrument='piano';
 var volume = 1;
 
 function change_instrument(instr_name) {
@@ -404,7 +404,9 @@ function initialize_site() {
 		chime_action = document.getElementById('chime_action').value;
 	}
 
-	chime = JSON.parse(document.getElementById('chime-content').value);
+	if(document.getElementById('chime-content').value != '') {
+		chime = JSON.parse(document.getElementById('chime-content').value);
+	}
 	if(chime_action == "listen") {
 		for(var array in chime) {
 			var col = chime[array];
