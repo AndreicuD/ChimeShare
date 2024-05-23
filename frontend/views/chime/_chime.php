@@ -85,6 +85,7 @@ $button_classes= "";
         <?= $form->errorSummary($model);?>
 
         <?= $form->field($model, 'title')->label(Yii::t('app', 'Give the chime a title!')) ?>
+        <?= $form->field($model, 'public')->checkbox(['uncheck' => '0', 'value' => '1']); ?>
         <?= $form->field($model, 'user_id')->hiddenInput()->label(false); ?>
         <?= $form->field($model, 'content')->hiddenInput()->label(false); ?>
 
