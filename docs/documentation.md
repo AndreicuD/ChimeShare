@@ -10,7 +10,7 @@
 
 Acest proiect este bazat pe frameworkul de PHP [Yii](https://www.yiiframework.com/) si pe libraria [Tone.js](https://tonejs.github.io/), utilizata pentru a genera sunetul instrumentelor.
 
-## Technologii utilizate:
+## Tehnologii utilizate:
 
 - JavaScript
 - Github
