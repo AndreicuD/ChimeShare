@@ -30,10 +30,11 @@ const note_durations = new Map ([
 	[0.25, '16n'],
 	[0.5, '8n'],
 	[0.75, '4n'],
-	[1, '1n']
+	[1, '2n']
 ]);
 
-const melody = [];
+var chime = [];
+var chime_action = 'listen';
 
 //-----------------------------------------------------------------------------------
 
@@ -117,7 +118,7 @@ function playNote(instrument, note, duration) {
 			chosen_instrument = fat_oscillators[note-1];
 			break;
 	}
-	console.log(note);
+	//console.log(note);
 	chosen_instrument.triggerAttackRelease(note_array.get(note), note_durations.get(duration), Tone.now()+0.01);
 }
 
@@ -176,8 +177,8 @@ function check_cell(cell_pressed) {
 			cell_pressed.className = cell_pressed.className.replace(' active_cell','');
 		}
 
-		//and we re-make the melody array
-		melody.length = 0;
+		//and we re-make the chime array
+		chime.length = 0;
 		for(var i=1; i<=32; i++) {
 			var current_column_notes = []
 			for(var j=1; j<=24; j++) {
@@ -188,10 +189,11 @@ function check_cell(cell_pressed) {
 				}
 			}
 			if (current_column_notes.length != 0) {
-				melody.push(current_column_notes);
+				chime.push(current_column_notes);
 			}
 		}
-		//console.log(melody);
+		//console.log(chime);
+		document.getElementById('chime-content').value = JSON.stringify(chime);
 	}
 
 	//play note
@@ -207,16 +209,16 @@ function erase_table() {
 			temp.innerText = '';
 		}
 	}
-	melody.length = 0;
+	chime.length = 0;
 	closePopup('erase_popup');
 }
 
 //-----------------------------------------------------------------------------------
 
 var timer;
-var melody_playing = false;
+var chime_playing = false;
 var playback_pointer = 2;
-var melody_pointer = 0;
+var chime_pointer = 0;
 var bpm = 120;
 var time_sign = 4; // aka 4/4
 
@@ -235,26 +237,26 @@ function remove_played_col_class_to(col) {
 	}
 }
 function check_and_play_col(playback_pointer) {
-	var current_cell_id = melody[melody_pointer][0].id;
+	var current_cell_id = chime[chime_pointer][0].id;
 	var check_cell_column_split = current_cell_id.split('c');
 	var check_cell_row_split = check_cell_column_split[1].split('r');
 	var check_cell_col = check_cell_row_split[0];
 	check_cell_col = parseInt(check_cell_col);
 
 	if(check_cell_col == playback_pointer) {
-		for(let note in melody[melody_pointer]) {
+		for(let note in chime[chime_pointer]) {
 
-			var cell_id = melody[melody_pointer][note].id;
+			var cell_id = chime[chime_pointer][note].id;
 			var c_split = cell_id.split('c');
 			var r_split = c_split[1].split('r');
 			col=r_split[0];
 			row=r_split[1];
 			col = parseInt(col);
 			row = parseInt(row);
-			playNote(instrument, row, melody[melody_pointer][note].duration / 4)
+			playNote(instrument, row, chime[chime_pointer][note].duration / 4)
 		}
-		if( (melody_pointer+1) != melody.length ) {
-			melody_pointer++;
+		if( (chime_pointer+1) != chime.length ) {
+			chime_pointer++;
 		}
 	}
 }
@@ -263,11 +265,11 @@ function playMelody() {
 	var play_button = document.getElementById('play_button');
 
 	var note_speed = 1000 * 60 / (bpm * time_sign);
-	if (!melody_playing) {
+	if (!chime_playing) {
 		play_button.innerHTML = '&#x23F9;';
-		melody_playing = true;
+		chime_playing = true;
 		playback_pointer = 2;
-		melody_pointer = 0;
+		chime_pointer = 0;
 	
 		add_played_col_class_to(1);
 		check_and_play_col(1);
@@ -278,7 +280,7 @@ function playMelody() {
 		remove_played_col_class_to(playback_pointer);
 		clearInterval(timer);
 		playback_pointer = 1;
-		melody_playing = false;
+		chime_playing = false;
 		//timer = setInterval(play_notes, note_speed);
 	}
 
@@ -286,9 +288,9 @@ function playMelody() {
 		if (playback_pointer == 33) {
 				remove_played_col_class_to(33);
 				playback_pointer=2;
-				melody_pointer = 0;
+				chime_pointer = 0;
 				clearInterval(timer);
-				melody_playing = false;
+				chime_playing = false;
 				play_button.innerHTML = '&#x25B6;';
 			} else {
 				add_played_col_class_to(playback_pointer);
@@ -317,39 +319,39 @@ function update_volume() {
 //-----------------------------------------------------------------------------------
 
 function sendMelodyData() {
-	var name_form;
+/*	var name_form;
 	var description_form;
 	var jsonMap;
 	
-	jsonMap = JSON.stringify([...melody.entries()]);
-	name_form = document.getElementById('melody_name').value;
-	description_form = document.getElementById('melody_description').value;
+	jsonMap = JSON.stringify([...chime.entries()]);
+	name_form = document.getElementById('chime_name').value;
+	description_form = document.getElementById('chime_description').value;
 
 	var jsonBase = "[[1,[]],[2,[]],[3,[]],[4,[]],[5,[]],[6,[]],[7,[]],[8,[]],[9,[]],[10,[]],[11,[]],[12,[]],[13,[]],[14,[]],[15,[]],[16,[]],[17,[]],[18,[]],[19,[]],[20,[]],[21,[]],[22,[]],[23,[]],[24,[]],[25,[]],[26,[]],[27,[]],[28,[]],[29,[]],[30,[]],[31,[]],[32,[]]]";
 
 	if (name_form != '' && jsonMap!=jsonBase) {
-		var melody_information = {title: name_form, description: description_form, data: jsonMap};
-		melody_information = JSON.stringify(melody_information);
+		var chime_information = {title: name_form, description: description_form, data: jsonMap};
+		chime_information = JSON.stringify(chime_information);
 		
 		var xhr = new XMLHttpRequest();
-		xhr.open("POST", "melody_process.php", true);
+		xhr.open("POST", "chime_process.php", true);
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xhr.onreadystatechange = function () {
 				if (xhr.readyState == 4 && xhr.status == 200) {
-						//window.location.href = 'melody_process.php';
+						//window.location.href = 'chime_process.php';
 						closePopup("save_popup");
 						//console.log(xhr.responseText);
 				}
 		};
 
 		// Send the JSON data as a POST parameter
-		xhr.send("jsonData=" + encodeURIComponent(melody_information));
+		xhr.send("jsonData=" + encodeURIComponent(chime_information));
 	} else {
 		if(name_form=='') {
-			var temp = document.getElementById('melody_name');
+			var temp = document.getElementById('chime_name');
 			temp.className += " is-invalid"
 		}
-	}
+	}*/
 }
 
 //-----------------------------------------------------------------------------------
@@ -395,6 +397,12 @@ function initialize_site() {
 	Tone.start();
 	update_volume();
 	change_bpm_by(0);
+
+	if (document.getElementById('chime_action')) {
+		chime_action = document.getElementById('chime_action').value;
+	}
+
+	chime = document.getElementById('chime-content').value;
 
 	for (let i = 0; i < 24; i++) {
 		am_synths.push(am_synth);

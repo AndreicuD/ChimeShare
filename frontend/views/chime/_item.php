@@ -2,6 +2,7 @@
 
 use yii\bootstrap5\Html;
 use yii\helpers\HtmlPurifier;
+use Yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $widget yii\widgets\ListView this widget instance */

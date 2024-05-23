@@ -19,7 +19,7 @@ class ChimeController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             'access' => [
@@ -38,7 +38,7 @@ class ChimeController extends Controller
                 ],
             ],
         ];
-    }
+    }*/
 
     /**
      * listen/view chime.
@@ -48,7 +48,7 @@ class ChimeController extends Controller
      */
     public function actionListen($id): string
     {
-        $model = $this->findModel($id);
+        $model = $this->findModelPublic($id);
 
         return $this->render('listen', [
             'model' => $model,
@@ -135,6 +135,22 @@ class ChimeController extends Controller
     protected function findModel(string $id): array|Chime|ActiveRecord
     {
         if (($model = Chime::find()->where('public_id = :id', [':id' => $id])->andWhere(['user_id' => Yii::$app->user->id])->one()) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException(Yii::t('app', 'The requested chime does not exist.'));
+    }
+
+        /**
+     * Finds the Chime based on its public_id value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param string $id - the public_id of the model
+     * @return array|Chime|ActiveRecord
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelPublic(string $id): array|Chime|ActiveRecord
+    {
+        if (($model = Chime::find()->where('public_id = :id', [':id' => $id])->one()) !== null) {
             return $model;
         }
 

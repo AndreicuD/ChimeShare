@@ -1,5 +1,8 @@
 <?php
 
+use yii\bootstrap5\ActiveForm;
+use yii\bootstrap5\Html;
+
 $this->registerJsFile('/js/tone.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->registerJsFile('/js/melodyMaker.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
@@ -72,37 +75,36 @@ $button_classes= "";
     </div>
 </div>
 
-<!-- save melody popup -->
+<!-- save chime popup -->
 <div id="save_popup">
     <div class="overlay_opaque"></div>
     <div class="popup">
         <h1 class="page_title">Save Melody</h1>
-        <form class="mb-3" id="myForm" method="post" action="melody_process.php">
-            <label for="melody_name">Give the melody a name!</label>
-            <input type="text" maxlength="255" oninput="changeCharLeft('melody_name', 'char_left_title', 255)" class="form-control" id="melody_name" placeholder="Your melodies name here!" name="melody_name">
-            <p class="small_gray_text" id="char_left_title">255</p>
+        <?php $form = ActiveForm::begin(['id' => 'form-signup', 'layout' => 'floating']); ?>
 
-            <label for="melody_description" class="form-label">Melody Description</label>
-            <textarea maxlength="1000" oninput="changeCharLeft('melody_description', 'char_left_desc', 1000)" class="form-control" id="melody_description" rows="3" name="melody_description"></textarea>
-            <p class="small_gray_text" id="char_left_desc">1000</p>
-            <br>
-            <div class="container text-center">
-                <div class="row">
-                    <div class="col">
-                        <button onclick="closePopup('save_popup')" type="button" class="btn btn-danger">Close</button>
-                    </div>
-                    <div class="col">
-                        <input type="reset" onclick="reset_char_left()" value="Reset" class="btn btn-warning"></input>
-                    </div>
-                    <div class="col">
-                        <input type="button" onclick="sendMelodyData()" value="Submit" class="btn btn-success"></input>
-                    </div>
+        <?= $form->errorSummary($model);?>
+
+        <?= $form->field($model, 'title')->label(Yii::t('app', 'Give the chime a title!')) ?>
+        <?= $form->field($model, 'user_id')->hiddenInput()->label(false); ?>
+        <?= $form->field($model, 'content')->hiddenInput()->label(false); ?>
+
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <button onclick="closePopup('save_popup')" type="button" class="btn btn-danger">Close</button>
+                </div>
+                <div class="col">
+                    <input type="reset" onclick="reset_char_left()" value="Reset" class="btn btn-warning"></input>
+                </div>
+                <div class="col">
+                    <input type="submit" value="Save" class="btn btn-success"></input>
                 </div>
             </div>
-        </form>
+        </div>
+        <?php ActiveForm::end(); ?>
     </div>
 </div>
-<!-- erase melody popup -->
+<!-- erase chime popup -->
 <div id="erase_popup">
     <div class="overlay_opaque"></div>
     <div class="popup">

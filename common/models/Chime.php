@@ -51,7 +51,6 @@ class Chime extends \yii\db\ActiveRecord
             [['public_id'], 'unique', 'on' => 'default'],
             [['active', 'public'], 'boolean', 'trueValue' => 1, 'falseValue' => 0],
             [['active'], 'default', 'value' => 1, 'on'=>'default'],
-            [['public_id'], 'default', 'value' => NULL, 'on'=>'default'],
             [['likes_count', 'public'], 'default', 'value' => 0, 'on'=>'default'],
             [['id', 'public_id', 'user_id', 'active', 'public', 'likes_count', 'title', 'created_at', 'updated_at', 'page_size'], 'safe', 'on' => 'search'],
             [['content'], 'safe'],

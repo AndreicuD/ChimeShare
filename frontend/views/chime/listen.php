@@ -16,4 +16,5 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Listen chime');
         'model' => $model,
         'read_only' => false,
     ]) ?>
+    <?= Html::hiddenInput('chime_action', 'listen', ['id'=>'chime_action']); ?>
 </div>
