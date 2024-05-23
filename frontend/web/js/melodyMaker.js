@@ -34,7 +34,7 @@ const note_durations = new Map ([
 ]);
 
 var chime = [];
-var chime_action = 'listen';
+var chime_action = 'edit';
 
 //-----------------------------------------------------------------------------------
 
@@ -141,63 +141,65 @@ function change_instrument(instr_name) {
 }
 
 function check_cell(cell_pressed) {
-	Tone.start();
-	//split the input string "cXrY", where X and Y are numbers, into two different variables;
-	//basically extracting the numbers
-	cell_id = cell_pressed.id;
-	var c_split = cell_id.split('c');
-	var r_split = c_split[1].split('r');
-	col=r_split[0];
-	row=r_split[1];
-	col = parseInt(col);
-	row = parseInt(row);
-
-	//console.dir(cell_id+' - '+raw_duration);
+	if(chime_action != "listen") {
+		Tone.start();
+		//split the input string "cXrY", where X and Y are numbers, into two different variables;
+		//basically extracting the numbers
+		cell_id = cell_pressed.id;
+		var c_split = cell_id.split('c');
+		var r_split = c_split[1].split('r');
+		col=r_split[0];
+		row=r_split[1];
+		col = parseInt(col);
+		row = parseInt(row);
 	
-	//first we verify that it's not part of the piano on the left of the page (where col==0)
-	if(col!=0) {
-		//then we get the duration of that note
-		var raw_duration = parseInt(cell_pressed.dataset.duration);
-		if (raw_duration < 4) {
-			raw_duration += 1;
-			cell_pressed.innerText = raw_duration+'/4';
-			duration = raw_duration/4;
-		} else {
-			raw_duration = 0;
-			cell_pressed.innerText = '';
-		}
-		cell_pressed.dataset.duration = raw_duration;
-
-		//now we give it the class that makes the button blue if it doesn't have it
-		if(raw_duration > 0) {
-			if (!cell_pressed.className.includes("active_cell")) {
-				cell_pressed.className += " active_cell";
-			}		
-		} else {
-			cell_pressed.className = cell_pressed.className.replace(' active_cell','');
-		}
-
-		//and we re-make the chime array
-		chime.length = 0;
-		for(var i=1; i<=32; i++) {
-			var current_column_notes = []
-			for(var j=1; j<=24; j++) {
-				var current_index = 'c' + i + 'r' + j;
-				var current_cell = document.getElementById(current_index);
-				if (current_cell.dataset.duration != 0) {
-					current_column_notes.push({id: current_index, duration: current_cell.dataset.duration});
+		//console.dir(cell_id+' - '+raw_duration);
+		
+		//first we verify that it's not part of the piano on the left of the page (where col==0)
+		if(col!=0) {
+			//then we get the duration of that note
+			var raw_duration = parseInt(cell_pressed.dataset.duration);
+			if (raw_duration < 4) {
+				raw_duration += 1;
+				cell_pressed.innerText = raw_duration+'/4';
+				duration = raw_duration/4;
+			} else {
+				raw_duration = 0;
+				cell_pressed.innerText = '';
+			}
+			cell_pressed.dataset.duration = raw_duration;
+	
+			//now we give it the class that makes the button blue if it doesn't have it
+			if(raw_duration > 0) {
+				if (!cell_pressed.className.includes("active_cell")) {
+					cell_pressed.className += " active_cell";
+				}		
+			} else {
+				cell_pressed.className = cell_pressed.className.replace(' active_cell','');
+			}
+	
+			//and we re-make the chime array
+			chime.length = 0;
+			for(var i=1; i<=32; i++) {
+				var current_column_notes = []
+				for(var j=1; j<=24; j++) {
+					var current_index = 'c' + i + 'r' + j;
+					var current_cell = document.getElementById(current_index);
+					if (current_cell.dataset.duration != 0) {
+						current_column_notes.push({id: current_index, duration: current_cell.dataset.duration});
+					}
+				}
+				if (current_column_notes.length != 0) {
+					chime.push(current_column_notes);
 				}
 			}
-			if (current_column_notes.length != 0) {
-				chime.push(current_column_notes);
-			}
+			//console.log(chime);
+			document.getElementById('chime-content').value = JSON.stringify(chime);
 		}
-		//console.log(chime);
-		document.getElementById('chime-content').value = JSON.stringify(chime);
+	
+		//play note
+		playNote(instrument, row, 0.25);
 	}
-
-	//play note
-	playNote(instrument, row, 0.25);
 }
 
 function erase_table() {
@@ -402,14 +404,28 @@ function initialize_site() {
 		chime_action = document.getElementById('chime_action').value;
 	}
 
-	chime = document.getElementById('chime-content').value;
+	chime = JSON.parse(document.getElementById('chime-content').value);
+	if(chime_action == "listen") {
+		for(var array in chime) {
+			var col = chime[array];
+			for(var note in col) {
+				var curr_cell = document.getElementById(col[note].id);
+				console.dir(curr_cell);
+				if (!curr_cell.className.includes("active_cell")) {
+					curr_cell.className += " active_cell";
+				}
+				curr_cell.dataset.duration = col[note].duration;
+				curr_cell.innerText = curr_cell.dataset.duration+'/4';
+			}
+		}
+	}
 
 	for (let i = 0; i < 24; i++) {
 		am_synths.push(am_synth);
 		fm_synths.push(fm_synth);
 		pianos.push(piano);
 		fat_oscillators.push(fat_osc);
-	  }
+	}
 }
 
 window.onload = initialize_site;
