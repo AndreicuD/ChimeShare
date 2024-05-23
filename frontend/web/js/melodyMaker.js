@@ -117,7 +117,8 @@ function playNote(instrument, note, duration) {
 			chosen_instrument = fat_oscillators[note-1];
 			break;
 	}
-	chosen_instrument.triggerAttackRelease(note_array.get(note), note_durations.get(duration), Tone.now());
+	console.log(note);
+	chosen_instrument.triggerAttackRelease(note_array.get(note), note_durations.get(duration), Tone.now()+0.01);
 }
 
 //-----------------------------------------------------------------------------------
@@ -135,7 +136,7 @@ function change_instrument(instr_name) {
 	temp = document.getElementById(id);
 	temp.className += 'active';
     instrument = instr_name;
-	console.log(instrument);
+	//console.log(instrument);
 }
 
 function check_cell(cell_pressed) {
@@ -183,7 +184,7 @@ function check_cell(cell_pressed) {
 				var current_index = 'c' + i + 'r' + j;
 				var current_cell = document.getElementById(current_index);
 				if (current_cell.dataset.duration != 0) {
-					current_column_notes.push(current_index);
+					current_column_notes.push({id: current_index, duration: current_cell.dataset.duration});
 				}
 			}
 			if (current_column_notes.length != 0) {
@@ -234,7 +235,7 @@ function remove_played_col_class_to(col) {
 	}
 }
 function check_and_play_col(playback_pointer) {
-	var current_cell_id = melody[melody_pointer][0];
+	var current_cell_id = melody[melody_pointer][0].id;
 	var check_cell_column_split = current_cell_id.split('c');
 	var check_cell_row_split = check_cell_column_split[1].split('r');
 	var check_cell_col = check_cell_row_split[0];
@@ -243,14 +244,14 @@ function check_and_play_col(playback_pointer) {
 	if(check_cell_col == playback_pointer) {
 		for(let note in melody[melody_pointer]) {
 
-			var cell_id = melody[melody_pointer][note];
+			var cell_id = melody[melody_pointer][note].id;
 			var c_split = cell_id.split('c');
 			var r_split = c_split[1].split('r');
 			col=r_split[0];
 			row=r_split[1];
 			col = parseInt(col);
 			row = parseInt(row);
-			playNote(instrument, row, document.getElementById(melody[melody_pointer][note]).dataset.duration / 4)
+			playNote(instrument, row, melody[melody_pointer][note].duration / 4)
 		}
 		if( (melody_pointer+1) != melody.length ) {
 			melody_pointer++;

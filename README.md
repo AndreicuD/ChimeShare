@@ -3,6 +3,8 @@
     <h1 align="center">ChimeShare</h1>
 </p>
 
+
+<h2 align="center">EN</h2>
 <h3 align="center">ChimeShare is an online web project dedicated to making music accesible to everyone, with a social twist. </h3>
 <br>
 
