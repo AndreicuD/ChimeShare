@@ -37,7 +37,8 @@ Aici intervine [Tone.js](https://tonejs.github.io/). Această bibliotecă rezolv
 Pentru ca această schimbare să fie posibilă, am rescris, pentru a treia oară, întregul backend pentru pagina Chime Maker, schimbând modul în care notele sunt stocate în fundal pe mașina utilizatorului și ulterior în baza de date. Cu acest nou design de structură, sunt, de asemenea, capabil să stochez diferite lungimi ale notelor, permițând posibilități nelimitate! (teoretic 2 la puterea 3072, dar cine stă să numere :] E încă mult )
 
 Odată cu trecerea la Tone.js, am decis să portez proiectul și pe un framework mai puternic, Yii. Yii aduce foarte multe îmbunătățiri la partea de securitate, dar implementarea lui a însemnat o rescriere a întregului site și a modului în care funcționează. Pe parcursul acestui proiect, am învatat foarte multe lucruri noi.
-Documentație și tehnologii
+
+<h2>Documentație și tehnologii</h2>
 
 Mai multe informații despre tehnologiile utilizate pot fi găsite în [documentație](docs/documentation.md).
 
