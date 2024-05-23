@@ -3,6 +3,42 @@
     <h1 align="center">ChimeShare</h1>
 </p>
 
+<h2 align="center">RO</h2>
+<h3 align="center">ChimeShare este un proiect web online care încearcă să facă muzica accesibilă pentru toată lumea, cu un twist social.</h3>
+<br>
+
+Cu toții cunoaștem acele idei care apar aleatoriu în timpul zilei și care par incredibile, dar pe care nu reușim să le salvăm la timp. Cu acest site, împărtășirea și scrierea propriilor tale melodii scurte devine mai ușoară ca niciodată. Toate necesitățile de bază pentru crearea de melodii simple sunt aduse aici, pe aceeași platformă, pentru a elimina stresul de a nu putea găsi un workflow confortabil pentru crearea muzicii tale.
+
+Această platformă permite crearea de melodii scurte, de 32 de note lungime, acoperind 2 octave.
+
+<h2>Aspectul social</h2>
+
+Acest proiect este realizat și cu aspectul social în minte. Pagina principală este concepută special pentru a permite descoperirea celor mai noi și populare melodii create de alți utilizatori. Având acest lucru în vedere, am creat o modalitate prin care oamenii să se conecteze între ei, permițând crearea de conturi pe site. Acest lucru ne oferă, de asemenea, posibilitatea de a urmări creatorii preferați pe platformă.
+
+Fiecare melodie creată are opțiunea de a fi afișată publicului, unde poate aduna aprecieri de la alți utilizatori, aducând posibilitatea de a deveni următorul „Chime-Maker”!
+
+<h2>O scurtă istorie</h2>
+
+În prezent, proiectul este bazat pe framework-ul PHP [Yii](https://www.yiiframework.com/) și biblioteca [Tone.js](https://tonejs.github.io/), pentru sunete.
+
+Acest site a fost scris inițial doar în HTML, CSS, JavaScript și puțin PHP, asta fiind ceea ce știam, dar pe măsură ce timpul a trecut și au fost adăugate funcții noi, am realizat că acestea nu vor fi suficiente.
+
+Pasul logic următor a fost portarea proiectului pe un micro-framework PHP, [Limonade](http://limonade-php.github.io/), care se ocupa de rutare și view-urile site-ului. Odată cu această schimbare, am profitat de ocazie pentru a îmbunătăți partea de sunet a proiectului. Înainte, fiecare sunet era un fișier mp3 care era redat, ceea ce însemna că trebuia să creez un fișier mp3 pentru fiecare dintre cele 24 de note, pentru fiecare instrument pe care intenționam să îl adaug. Vă puteți imagina că acest lucru era foarte plictisitor și nici nu performa grozav.
+
+Noua implementare se baza pe [audiosynth](https://github.com/keithwhor/audiosynth), de Keithwhor, dar am descoperit curând că nici aceasta nu putea reda multiple note simultan. Faptul că JavaScript este un limbaj single-threaded a făcut ca implementarea polifoniei să fie foarte dificil de realizat de unul singur, așa că am știut că găsirea unei noi biblioteci era necesară.
+
+Aici intervine [Tone.js](https://tonejs.github.io/). Această bibliotecă rezolvă problema polifoniei notelor și poate, de asemenea, să genereze sunete de instrumente pe loc. Acest lucru înseamnă că sunetele sunt create pe baza diferitelor variabile pe care le pot schimba ușor, fără a fi nevoie să refac vreun fișier eu însumi. Acest lucru înseamnă că în viitor pot adăuga o funcție care permite utilizatorilor să-și creeze propriile instrumente sau să facă sample-uri la diferite sunete de ale lor.
+
+Pentru ca această schimbare să fie posibilă, am rescris, pentru a treia oară, întregul backend pentru pagina Chime Maker, schimbând modul în care notele sunt stocate în fundal pe mașina utilizatorului și ulterior în baza de date. Cu acest nou design de structură, sunt, de asemenea, capabil să stochez diferite lungimi ale notelor, permițând posibilități nelimitate! (teoretic 2 la puterea 3072, dar cine stă să numere :] E încă mult )
+
+Odată cu trecerea la Tone.js, am decis să portez proiectul și pe un framework mai puternic, Yii. Yii aduce foarte multe îmbunătățiri la partea de securitate, dar implementarea lui a însemnat o rescriere a întregului site și a modului în care funcționează. Pe parcursul acestui proiect, am învatat foarte multe lucruri noi.
+Documentație și tehnologii
+
+Mai multe informații despre tehnologiile utilizate pot fi găsite în [documentație](docs/documentation.md).
+
+------------------------------
+
+<h2 align="center">EN</h2>
 <h3 align="center">ChimeShare is an online web project dedicated to making music accesible to everyone, with a social twist. </h3>
 <br>
 
