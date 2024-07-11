@@ -12,8 +12,6 @@ Acest proiect este bazat pe frameworkul de PHP [Yii](https://www.yiiframework.co
 
 ## Tehnologii utilizate:
 
-- Github
-
 ### Externe:
 
 - [Yii 2](https://www.yiiframework.com/) - framework open-source MVC pentru PHP care se ocupa de rutare, viewuri, administrare de asset-uri, modele de date, autentificare, autorizare si alte elemente de securitate care previn atacurile nedorite.
@@ -28,6 +26,10 @@ Acest proiect este bazat pe frameworkul de PHP [Yii](https://www.yiiframework.co
 ### Backend
 - PHP 8
 - MariaDB 11
+  
+### Diverse:
+
+- Github
 
 ## Cerinte de sistem:
 
@@ -40,6 +42,7 @@ Acest proiect este bazat pe frameworkul de PHP [Yii](https://www.yiiframework.co
 - Composer
 - Server Apache
 - MariaDB
+
 
 ## Paginile si structura site-ului:
 
@@ -70,8 +73,8 @@ Utilizatorul are acces la prima pagina, de unde poate asculta ultimele melodii u
 
 Dupa ce utilizatorul isi face cont, el primeste dreptul de a:
 
-1. Isi arata aprecierea pentru melodia altui utilizator
-2. Isi face propriile melodii
+1. Aprecia melodiile altui utilizator
+2. Crea propriile melodii
 
 Asa arata noua lui bara de navigatie:
 
