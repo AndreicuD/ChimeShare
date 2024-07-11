@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\ChimeLike;
+use common\models\User;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
@@ -55,16 +56,23 @@ class ChimeController extends Controller
         ]);
     }
 
-    public function actionIndex()
+    public function actionIndex($instrument = null)
     {
         $searchModel = new Chime();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $filters = [];
+        $filters['Chime']['instrument'] = $instrument;
+        $dataProvider = $searchModel->search($filters);
         $dataProvider->pagination->pageParam = 'p';
-        $dataProvider->query->andWhere(['user_id' => Yii::$app->user->id]);
+        $dataProvider->query->andWhere(['public' => 1, 'active' => 1]);
+        $dataProvider->pagination->forcePageParam = 0;
+        $dataProvider->pagination->defaultPageSize = 18;
+        
+        $modelLike = new ChimeLike();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider,
+            'modelLike' => $modelLike,
         ]);
     }
 
@@ -76,10 +84,12 @@ class ChimeController extends Controller
     {
         $model = new Chime();
         $model->user_id = Yii::$app->user->id;
+        $model->instrument = 'piano';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model = Chime::find()->where('id = :id', [':id' => $model->id])->one();
             Yii::$app->session->setFlash('success', 'The chime has been created.');
-            return $this->redirect(['chime/update', 'id' => $model->public_id]);
+            return $this->redirect(['chime/listen', 'id' => $model->public_id]);
         }
 
         return $this->render('create' ,[

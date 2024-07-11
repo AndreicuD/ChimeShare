@@ -8,7 +8,7 @@ use frontend\models\SignupForm;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Signup';
+$this->title = Yii::t('app', 'Signup');
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
@@ -24,15 +24,17 @@ $this->title = 'Signup';
                 <?= $form->field($model, 'password')->passwordInput()->label(Yii::t('app', 'Password')) ?>
 
                 <hr>
+                <p class="">This will form your username.</p>
 
                 <?= $form->field($model, 'firstname')->label(Yii::t('app', 'Firstname')) ?>
                 <?= $form->field($model, 'lastname')->label(Yii::t('app', 'Lastname')) ?>
-                <?= $form->field($model, 'sex')->dropDownList(\common\models\User::sexList(), ['prompt' => Yii::t('app', 'Select the sex ...')]); ?>
-                <?= $form->field($model, 'birth_date', ['inputOptions' => ['type' => 'date']])->label(Yii::t('app', 'Birth date')); ?>
+                <!--<?= $form->field($model, 'sex')->dropDownList(\common\models\User::sexList(), ['prompt' => Yii::t('app', 'Select the sex ...')]); ?>-->
+                <!--<?= $form->field($model, 'birth_date', ['inputOptions' => ['type' => 'date']])->label(Yii::t('app', 'Birth date')); ?>-->
 
-                <hr>
+                <!--<hr>-->
 
-                <?= $form->field($model, 'phone')->textInput()->label(Yii::t('app', 'Phone')); ?>
+                
+                <!--<?= $form->field($model, 'phone')->textInput()->label(Yii::t('app', 'Phone')); ?>-->
 
                 <hr>
 

@@ -3,6 +3,8 @@
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 
+/* @var $this yii\web\View */
+
 $this->registerJsFile('/js/tone.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->registerJsFile('/js/melodyMaker.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
@@ -42,51 +44,56 @@ $button_classes= "";
 </div>
 
 <div id="bottom_settings" class="container mb-3 p-0 pt-3">
-    <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Bottom toolbar">
+    <div class="btn-toolbar justify-content-between bottom_settings_bar" role="toolbar" aria-label="Bottom toolbar">
         <div class="btn-group me-auto" role="group">
-                <button class="play_btn" id="play_button" onclick="playMelody()">&#x25B6;</button>
+            <button class="btn btn-light play_btn" id="play_button" onclick="playMelody()">&#x25B6;</button>
         </div>
         <div class="input-group pe-2">
-            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                Instrument
+            <button id="instrument_selector_button" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <?= $model::instrumentList()[$model->instrument] ?? Yii::t('app', 'Instrument'); ?>
             </button>
             <ul class="dropdown-menu">
                 <li><a id="piano_drop" class="dropdown-item user-select-none active" onclick="change_instrument('piano')">Piano</a></li>
-                <li><a id="am_synth_drop" class="dropdown-item user-select-none" onclick="change_instrument('am_synth')">AMSynth</a></li>
-                <li><a id="fm_synth_drop" class="dropdown-item user-select-none" onclick="change_instrument('fm_synth')">FMSynth</a></li>
-                <li><a id="fat_osc_drop" class="dropdown-item user-select-none" onclick="change_instrument('fat_osc')">Fat Oscillator</a></li>
+                <li><a id="steel_guitar_drop" class="dropdown-item user-select-none" onclick="change_instrument('steel_guitar')">Steel Guitar</a></li>
+                <li><a id="nylon_guitar_drop" class="dropdown-item user-select-none" onclick="change_instrument('nylon_guitar')">Nylon Guitar</a></li>
+                <li><a id="dual_synth_drop" class="dropdown-item user-select-none" onclick="change_instrument('dual_synth')">Dual Synth</a></li>
+                <li><a id="fm_synth_drop" class="dropdown-item user-select-none" onclick="change_instrument('fm_synth')">FM Synth</a></li>
+                <li><a id="am_synth_drop" class="dropdown-item user-select-none" onclick="change_instrument('am_synth')">AM Synth</a></li>
+                <li><a id="test_synth_drop" class="dropdown-item user-select-none" onclick="change_instrument('test_synth')">Test Synth</a></li>
             </ul>
         </div>
         <div class="input-group pe-2" role="group">
             <span class="input-group-text user-select-none" id="addon-wrapping">BPM</span>
-            <button onclick="change_bpm_by(-1)" type="button" class="btn btn-outline-secondary">-</button>
+            <button onclick="change_bpm_by(-1)" type="button" class="btn btn-light">-</button>
             <input type="text" class="form-control" id="bpm" aria-label="BPM" value="120" oninput="change_bpm_by(0)"/>
-            <button onclick="change_bpm_by(1)" type="button" class="btn btn-outline-secondary">+</button>
+            <button onclick="change_bpm_by(1)" type="button" class="btn btn-light">+</button>
         </div>
-        <div class="input-group form-range">
+        <div class="input-group pe-2">
             <span class="input-group-text user-select-none" id="addon-wrapping">Volume</span>
-            <input type="range" min="0" max="100" value="100" class="form-control" id="volume_slider" oninput="update_volume()">
-            <span class="input-group-text volume_text user-select-none" id="volume_text">100</span>
+            <input type="range" min="0" max="100" value="60" class="form-control" id="volume_slider" oninput="update_volume()">
+            <span class="input-group-text user-select-none" id="volume_text">60</span>
         </div>
-        <div class="btn-group ms-auto" role="group">
+        <div class="btn-group ms-auto" id="save_delete_buttons" role="group">
             <button onclick="openPopup('erase_popup')" class="btn btn-danger">Erase</button>
-            <button onclick="openPopup('save_popup')" type="button" class="btn btn-success"> Save Melody </button>
+            <button onclick="openPopup('save_popup')" type="button" class="btn btn-success">Save Melody</button>
         </div>
     </div>
 </div>
 
 <!-- save chime popup -->
 <div id="save_popup">
-    <div class="overlay_opaque"></div>
+    <div class="overlay_opaque" onclick="closePopup('save_popup')"></div>
     <div class="popup">
         <h1 class="page_title">Save Melody</h1>
-        <?php $form = ActiveForm::begin(['id' => 'form-signup', 'layout' => 'floating']); ?>
+        <?php $form = ActiveForm::begin(['id' => 'form-savechime', 'layout' => 'floating']); ?>
 
         <?= $form->errorSummary($model);?>
 
         <?= $form->field($model, 'title')->label(Yii::t('app', 'Give the chime a title!')) ?>
         <?= $form->field($model, 'public')->checkbox(['uncheck' => '0', 'value' => '1']); ?>
         <?= $form->field($model, 'user_id')->hiddenInput()->label(false); ?>
+        <?= $form->field($model, 'instrument')->hiddenInput()->label(false); ?>
+        <?= $form->field($model, 'bpm')->hiddenInput()->label(false); ?>
         <?= $form->field($model, 'content')->hiddenInput()->label(false); ?>
 
         <div class="container text-center">
@@ -107,7 +114,7 @@ $button_classes= "";
 </div>
 <!-- erase chime popup -->
 <div id="erase_popup">
-    <div class="overlay_opaque"></div>
+    <div class="overlay_opaque" onclick="closePopup('erase_popup')"></div>
     <div class="popup">
         <h1 class="page_title">Erase Melody</h1>
         <h2 class="page_title">

@@ -46,7 +46,18 @@ return [
             'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'suffix' => '',
             'rules' => [
+                '/' => 'site/index',
+                'about' => 'site/about',
+                'contact' => 'site/contact',
+                'chimes' => 'chime/index',
+                'chimes/<instrument:\w+>' => 'chime/index',
+            ],
+            'normalizer' => [
+                'class' => 'yii\web\UrlNormalizer',
+                'action' => null, // No redirection by default
+                'normalizeTrailingSlash' => true, // This option is available in Yii 2.0.10 or higher
             ],
         ],
         'assetManager' => [

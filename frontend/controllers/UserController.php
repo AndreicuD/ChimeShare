@@ -13,6 +13,8 @@ use frontend\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
+use common\models\Chime;
+use common\models\ChimeLike;
 
 /**
  * Site controller
@@ -34,7 +36,7 @@ class UserController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['index', 'profile', 'logout'],
+                        'actions' => ['index', 'profile', 'chimes', 'logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -64,6 +66,25 @@ class UserController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    
+    public function actionChimes()
+    {
+        $searchModel = new Chime();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageParam = 'p';
+        $dataProvider->query->andWhere(['user_id' => Yii::$app->user->id]);
+        $dataProvider->pagination->forcePageParam = 0;
+        $dataProvider->pagination->defaultPageSize = 12;
+
+        $modelLike = new ChimeLike();
+
+        return $this->render('chimes', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'modelLike' => $modelLike,
+        ]);
     }
 
     /**

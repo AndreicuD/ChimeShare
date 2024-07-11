@@ -21,6 +21,7 @@ use yii\db\Expression;
  */
 class ChimeLike extends \yii\db\ActiveRecord
 {
+    public $public_chime_id;
     /**
      * @inheritdoc
      */
@@ -37,6 +38,7 @@ class ChimeLike extends \yii\db\ActiveRecord
         return [
             [['chime_id', 'user_id'], 'required', 'on' => 'default'],
             [['chime_id', 'user_id'], 'integer'],
+            [['public_chime_id'], 'safe'],
             [['id', 'chime_id', 'user_id', 'created_at', 'page_size'], 'safe', 'on' => 'search'],
             [['chime_id'], 'exist', 'skipOnError' => true, 'targetClass' => Chime::class, 'targetAttribute' => ['chime_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],

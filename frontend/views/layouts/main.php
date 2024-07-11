@@ -25,11 +25,45 @@ AppAsset::register($this);
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
 
+<div class="background" id="background"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+<script>
+    VANTA.FOG({
+        el: "#background",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        highlightColor: 0xcaeefc,
+        midtoneColor: 0xf0fafe,
+        lowlightColor: 0xebebeb,
+        baseColor: 0xfcfeff,
+        blurFactor: 0.73,
+        speed: 3.00,
+        zoom: 0.80
+    })
+</script>
+
+<!--<div class="cursor" style="top:0; left: 0;" id="cursor"></div>
+
+<script type="text/javascript">
+    const cursor = document.querySelector(".cursor");
+
+    document.addEventListener("mousemove", (e) => {
+        let x = e.clientX;
+        let y= e.clientY;
+        cursor.style.top = parseInt(parseInt(4*parseInt(cursor.style.top) + y)/5) + 'px';
+        cursor.style.left = parseInt(parseInt(4*parseInt(cursor.style.left) + x)/5) + 'px';
+    });
+</script>-->
+
 <header>
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
-        'brandImage' => '/img/logo.png',
+        'brandImage' => '/img/logo-white.png',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark',
@@ -39,11 +73,12 @@ AppAsset::register($this);
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
+        ['label' => 'All chimes', 'url' => ['/chime/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/user/signup']];
     } else {
-        $menuItems[] = ['label' => 'My chimes', 'url' => ['/chime/index']];
+        $menuItems[] = ['label' => 'My chimes', 'url' => ['/user/chimes']];
     }
 
     echo Nav::widget([
@@ -60,6 +95,7 @@ AppAsset::register($this);
 </header>
 
 <main role="main" class="flex-shrink-0">
+
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

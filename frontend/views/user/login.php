@@ -7,7 +7,7 @@
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 
-$this->title = 'Login';
+$this->title = Yii::t('app', 'Login');
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
@@ -27,8 +27,8 @@ $this->title = 'Login';
 
                 <div class="my-1 mx-0" style="color:#999;">
                     If you forgot your password you can <?= Html::a('reset it', ['user/request-password-reset']) ?>.
-                    <br>
-                    Need new verification email? <?= Html::a('Resend', ['user/resend-verification-email']) ?>
+                    <!--<br>
+                    Need new verification email? <?= Html::a('Resend', ['user/resend-verification-email']) ?>-->
                 </div>
 
                 <div class="form-group">

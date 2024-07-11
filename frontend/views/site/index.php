@@ -6,6 +6,10 @@
 use yii\bootstrap5\Html;
 use yii\widgets\ListView;
 
+$this->registerJsFile('/js/tone.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('/js/index_melody_play.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('/js/melodyMaker.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+
 $this->title = 'Chime Share';
 ?>
 <div class="site-index">
@@ -33,6 +37,7 @@ $this->title = 'Chime Share';
                         'dataProvider' => $bestDataProvider,
                         'id' => 'best_chimes',
                         'itemView' => '_item',
+                        'viewParams' => ['modelLike'=> $modelLike, 'where' => 'best_chimes'],
                         'options' => [
                             'tag' => 'div',
                             'class' => 'list-wrapper row',
@@ -62,6 +67,7 @@ $this->title = 'Chime Share';
                         'dataProvider' => $latestDataProvider,
                         'id' => 'latest_chimes',
                         'itemView' => '_item',
+                        'viewParams' => ['modelLike'=> $modelLike, 'where' => 'latest_chimes'],
                         'options' => [
                             'tag' => 'div',
                             'class' => 'list-wrapper row',
@@ -84,6 +90,37 @@ $this->title = 'Chime Share';
                     ]); ?>
                 </div>
             </div>
+            <p class='page_title' style="text-align: center;">For more chimes please visit <a href="/chime/index">this page</a>!</p>
         </div>
     </div>
 </div>
+
+<?php
+$js_text_processing = Yii::t('app', 'Processing');
+$bottomJs = <<< JS
+$(document).ready(function () {
+    $(document).on('submit', 'form.form-like', function(event) {
+        event.preventDefault();
+        var form = $(this);
+        $.ajax({
+            url: form.attr('action'),
+            type: form.attr('method'),
+            data: form.serialize(),
+            success: function (data) {
+                //console.dir(data);
+                var public_id = form.attr('data-chime');
+                if (data.success == true) {
+                    $('button.like_btn[data-chime="'+public_id+'"]').each(function(){
+                        $(this).toggleClass('is_liked_by_user');
+                    });
+                    $('p.like-count[data-chime="'+public_id+'"] > span').each(function(){
+                        $(this).html(data.likes_count);
+                    });
+                }
+            }
+        });
+    });
+});
+JS;
+$this->registerJs($bottomJs, yii\web\View::POS_END);
+?>

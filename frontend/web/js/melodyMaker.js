@@ -39,47 +39,8 @@ var chime_action = 'edit';
 //-----------------------------------------------------------------------------------
 
 const now = Tone.now();
-const vol = new Tone.Volume(-16).toDestination();
+const vol = new Tone.Volume(-16).toDestination();	
 
-const am_synth = new Tone.Synth({
-	"volume": 0,
-	"detune": 0,
-	"portamento": 0,
-	"harmonicity": 2.5,
-	"oscillator": {
-		"partialCount": 0,
-		"partials": [],
-		"phase": 0,
-		"type": "fatsawtooth",
-		"count": 3,
-		"spread": 20
-	},
-	"envelope": {
-		"attack": 0.1,
-		"attackCurve": "linear",
-		"decay": 0.2,
-		"decayCurve": "exponential",
-		"release": 0.3,
-		"releaseCurve": "exponential",
-		"sustain": 0.2
-	},
-	"modulation": {
-		"partialCount": 0,
-		"partials": [],
-		"phase": 0,
-		"type": "square"
-	},
-	"modulationEnvelope": {
-		"attack": 0.5,
-		"attackCurve": "linear",
-		"decay": 0.01,
-		"decayCurve": "exponential",
-		"release": 0.5,
-		"releaseCurve": "exponential",
-		"sustain": 1
-	}
-}).connect(vol).toDestination();
-const fm_synth = new Tone.FMSynth().connect(vol).toDestination();
 const piano = new Tone.Sampler({
 	urls: {
 		C4 : 'piano/C4.mp3',
@@ -94,32 +55,102 @@ const piano = new Tone.Sampler({
 	release : 1,
 	baseUrl : '/sounds/',
 }).connect(vol).toDestination();
-const fat_osc = new Tone.FatOscillator("Ab3", "sawtooth", 40).connect(vol).toDestination();
-
-const am_synths = [];
-const fm_synths = [];
-const fat_oscillators = [];
-const pianos = [];
+const nylon_guitar = new Tone.Sampler({
+	urls: {
+		C4 : 'nylon_guitar/C4.mp3',
+		'D#4' : 'nylon_guitar/Dsharp4.mp3',
+		'F#4' : 'nylon_guitar/Fsharp4.mp3',
+		A4 : 'nylon_guitar/A4.mp3',
+		C5 : 'nylon_guitar/C5.mp3',
+		'D#5' : 'nylon_guitar/Dsharp5.mp3',
+		'F#5' : 'nylon_guitar/Fsharp5.mp3',
+		A5 : 'nylon_guitar/A5.mp3'
+	},
+	release : 1,
+	baseUrl : '/sounds/',
+}).connect(vol).toDestination();
+const steel_guitar = new Tone.Sampler({
+	urls: {
+		C4 : 'steel_guitar/C4.mp3',
+		'D#4' : 'steel_guitar/Dsharp4.mp3',
+		'F#4' : 'steel_guitar/Fsharp4.mp3',
+		A4 : 'steel_guitar/A4.mp3',
+		C5 : 'steel_guitar/C5.mp3',
+		'D#5' : 'steel_guitar/Dsharp5.mp3',
+		'F#5' : 'steel_guitar/Fsharp5.mp3',
+		A5 : 'steel_guitar/A5.mp3'
+	},
+	release : 1,
+	baseUrl : '/sounds/',
+}).connect(vol).toDestination();
 
 function playNote(instrument, note, duration) {
-	//console.log(instrument);
-	let chosen_instrument = am_synths[note-1];
+	console.log(note);
+	let chosen_instrument = piano;
+	console.log(volume);
+	chosen_instrument.volume.value = volume;
+	
 	switch (instrument) {
-		case 'piano':
-			chosen_instrument = pianos[note-1];
-			break;
 		case 'am_synth':
-			chosen_instrument = am_synths[note-1];
+			chosen_instrument = new Tone.Synth({
+					"volume": 0,
+					"detune": 0,
+					"portamento": 0,
+					"harmonicity": 2.5,
+					"oscillator": {
+						"partialCount": 0,
+						"partials": [],
+						"phase": 0,
+						"type": "fatsawtooth",
+						"count": 3,
+						"spread": 20
+					},
+					"envelope": {
+						"attack": 0.1,
+						"attackCurve": "linear",
+						"decay": 0.2,
+						"decayCurve": "exponential",
+						"release": 0.3,
+						"releaseCurve": "exponential",
+						"sustain": 0.2
+					},
+					"modulation": {
+						"partialCount": 0,
+						"partials": [],
+						"phase": 0,
+						"type": "square"
+					},
+					"modulationEnvelope": {
+						"attack": 0.5,
+						"attackCurve": "linear",
+						"decay": 0.01,
+						"decayCurve": "exponential",
+						"release": 0.5,
+						"releaseCurve": "exponential",
+						"sustain": 1
+					}
+				}).connect(vol).toDestination();
 			break;
 		case 'fm_synth':
-			chosen_instrument = fm_synths[note-1];
+			chosen_instrument = new Tone.FMSynth().connect(vol).toDestination();
 			break;
-		case 'fat_osc':
-			chosen_instrument = fat_oscillators[note-1];
+		case 'dual_synth':
+			chosen_instrument = new Tone.DuoSynth().connect(vol).toDestination();
+			break;
+		case 'test_synth':
+			chosen_instrument = new Tone.PluckSynth().connect(vol).toDestination();
+			break;
+		case 'nylon_guitar':
+			chosen_instrument = nylon_guitar;
+			break;
+		case 'steel_guitar':
+			chosen_instrument = steel_guitar;
+			break;
+		case 'piano':
+			chosen_instrument = piano;
 			break;
 	}
-	//console.log(note);
-	chosen_instrument.triggerAttackRelease(note_array.get(note), note_durations.get(duration), Tone.now()+0.01);
+	chosen_instrument.triggerAttackRelease(note_array.get(note), note_durations.get(duration));
 }
 
 //-----------------------------------------------------------------------------------
@@ -135,8 +166,10 @@ function change_instrument(instr_name) {
 	}
 	id = instr_name + '_drop';
 	temp = document.getElementById(id);
-	temp.className += 'active';
+	temp.className += ' active';
     instrument = instr_name;
+	document.getElementById('chime-instrument').value = instrument;
+	document.getElementById('instrument_selector_button').innerText = temp.innerText;
 	//console.log(instrument);
 }
 
@@ -195,6 +228,7 @@ function check_cell(cell_pressed) {
 			}
 			//console.log(chime);
 			document.getElementById('chime-content').value = JSON.stringify(chime);
+			//console.dir(document.getElementById('chime-instrument'));
 		}
 	
 		//play note
@@ -217,27 +251,55 @@ function erase_table() {
 
 //-----------------------------------------------------------------------------------
 
-var timer;
+var timer = null;
 var chime_playing = false;
 var playback_pointer = 2;
 var chime_pointer = 0;
 var bpm = 120;
 var time_sign = 4; // aka 4/4
 
+function clear_piano_note(note) {
+	var piano_note = document.getElementById('c0r' + note);
+	//console.log(piano_note);
+	piano_note.className = piano_note.className.replace(' played_col', '');
+}
+
+function play_piano_note(note, duration) {
+	var piano_note = document.getElementById('c0r' + note);
+	piano_note.className += " played_col";
+	var note_speed = 1000 * 60 / (bpm * time_sign);
+	note_speed *= duration*8;
+	setTimeout(clear_piano_note.bind(null, note), parseInt(note_speed));
+}
+
 function add_played_col_class_to(col) {
+	//var piano_note = document.getElementById('c0r' + note);
 	for(var j=1; j<=24; j++) {
 		var id = 'c' + col + 'r' + j;
 		var note = document.getElementById(id);
 		note.className += ' played_col';
 	}
+	//piano_note.className += ' played_col';
 }
 function remove_played_col_class_to(col) {
+	//var piano_note = document.getElementById('c0r' + note);
 	for(var j=1; j<=24; j++) {
 		var id = 'c' + (col-1) + 'r' + j;
 		var note = document.getElementById(id);
 		note.className = note.className.replace(' played_col','');
 	}
+	//piano_note.className = piano_note.className.replace(' played_col','');
 }
+function remove_played_columns() {
+	for(let i = 1; i<=32; i++) {
+		for(var j=1; j<=24; j++) {
+			var id = 'c' + i + 'r' + j;
+			var note = document.getElementById(id);
+			note.className = note.className.replace(' played_col','');
+		}
+	}
+}
+
 function check_and_play_col(playback_pointer) {
 	var current_cell_id = chime[chime_pointer][0].id;
 	var check_cell_column_split = current_cell_id.split('c');
@@ -247,7 +309,7 @@ function check_and_play_col(playback_pointer) {
 
 	if(check_cell_col == playback_pointer) {
 		for(let note in chime[chime_pointer]) {
-
+			//console.log(note);
 			var cell_id = chime[chime_pointer][note].id;
 			var c_split = cell_id.split('c');
 			var r_split = c_split[1].split('r');
@@ -255,6 +317,7 @@ function check_and_play_col(playback_pointer) {
 			row=r_split[1];
 			col = parseInt(col);
 			row = parseInt(row);
+			play_piano_note(row, chime[chime_pointer][note].duration / 4);
 			playNote(instrument, row, chime[chime_pointer][note].duration / 4)
 		}
 		if( (chime_pointer+1) != chime.length ) {
@@ -279,7 +342,7 @@ function playMelody() {
 		timer = setInterval(play_notes, note_speed);
 	} else {
 		play_button.innerHTML = '&#x25B6;';
-		remove_played_col_class_to(playback_pointer);
+		remove_played_columns();
 		clearInterval(timer);
 		playback_pointer = 1;
 		chime_playing = false;
@@ -303,19 +366,42 @@ function playMelody() {
 		}
 }
 
+function play_notes() {
+	if (playback_pointer == 33) {
+		remove_played_col_class_to(33);
+		playback_pointer=2;
+		chime_pointer = 0;
+		clearInterval(timer);
+		chime_playing = false;
+		play_button.innerHTML = '&#x25B6;';
+	} else {
+		add_played_col_class_to(playback_pointer);
+		check_and_play_col(playback_pointer);
+		remove_played_col_class_to(playback_pointer);
+	}
+	playback_pointer++;
+}
+
 //-----------------------------------------------------------------------------------
 
 function change_bpm_by(i) {
-	document.getElementById("bpm").value = parseInt(document.getElementById("bpm").value) + i;
-	bpm = document.getElementById("bpm").value;
-	Tone.Transport.bpm.value = bpm;
+	if(document.getElementById("bpm")) {
+		document.getElementById("bpm").value = parseInt(document.getElementById("bpm").value) + i;
+		bpm = document.getElementById("bpm").value;
+		Tone.Transport.bpm.value = bpm;
+		document.getElementById('chime-bpm').value = ''+bpm;
+	}
 }
 
 function update_volume() {
-	volume = parseInt( document.getElementById('volume_slider').value );
-	document.getElementById('volume_text').innerText = volume;
-	//volume = volume/100;
-	//vol.volume = volume;
+	if(document.getElementById("volume_text") && document.getElementById("volume_slider")) {
+		volume = parseInt( document.getElementById('volume_slider').value );
+		document.getElementById('volume_text').innerText = volume;
+		volume = volume/100;
+		volume = volume - 1.0;
+		volume *= 35;
+		//console.log(volume);
+	}
 }
 
 //-----------------------------------------------------------------------------------
@@ -376,57 +462,43 @@ function closePopup(id) {
 
 //-----------------------------------------------------------------------------------
 
-function changeCharLeft(input_form, char_left, maxsize) {
-    var chars = document.getElementById(char_left+'');
-    
-    var input = document.getElementById(input_form+'');
-    if(input.className.includes('is-invalid')) {
-        input.className = input.className.replace(' is-invalid','');
-    }
-
-    var inputVal = document.getElementById(input_form+'').value;
-    chars.innerText = maxsize-inputVal.length;
-}
-
-function reset_char_left() {
-    document.getElementById('char_left_title').innerText = 255;
-    document.getElementById('char_left_desc').innerText = 1000;
-}
-
-//-----------------------------------------------------------------------------------
-
 function initialize_site() {
 	Tone.start();
-	update_volume();
-	change_bpm_by(0);
-
-	if (document.getElementById('chime_action')) {
-		chime_action = document.getElementById('chime_action').value;
-	}
-
-	if(document.getElementById('chime-content').value != '') {
-		chime = JSON.parse(document.getElementById('chime-content').value);
-	}
-	if(chime_action == "listen") {
-		for(var array in chime) {
-			var col = chime[array];
-			for(var note in col) {
-				var curr_cell = document.getElementById(col[note].id);
-				console.dir(curr_cell);
-				if (!curr_cell.className.includes("active_cell")) {
-					curr_cell.className += " active_cell";
-				}
-				curr_cell.dataset.duration = col[note].duration;
-				curr_cell.innerText = curr_cell.dataset.duration+'/4';
-			}
+	volume = -14; //equivalent to the volume set to 60
+	if(document.getElementById("music_interface")) {
+		update_volume();
+	
+		if (document.getElementById('chime_action')) {
+			chime_action = document.getElementById('chime_action').value;
 		}
-	}
-
-	for (let i = 0; i < 24; i++) {
-		am_synths.push(am_synth);
-		fm_synths.push(fm_synth);
-		pianos.push(piano);
-		fat_oscillators.push(fat_osc);
+	
+		if(document.getElementById('chime-content') && document.getElementById('chime-content').value != '') {
+			chime = JSON.parse(document.getElementById('chime-content').value);
+		}
+		if(chime_action == "listen") {
+			change_instrument(document.getElementById('chime-instrument').value);
+			change_bpm_by(parseInt(document.getElementById('chime-bpm').value) - 120);
+			document.getElementById("save_delete_buttons").className += ' hide';
+			for(var array in chime) {
+				var col = chime[array];
+				for(var note in col) {
+					var curr_cell = document.getElementById(col[note].id);
+					//console.dir(curr_cell);
+					if (!curr_cell.className.includes("active_cell")) {
+						curr_cell.className += " active_cell";
+					}
+					curr_cell.dataset.duration = col[note].duration;
+					curr_cell.innerText = curr_cell.dataset.duration+'/4';
+				}
+			}
+		} else {
+			if(document.getElementById("chime-instrument") && document.getElementById("chime-bpm")) {
+				document.getElementById('chime-instrument').value = 'piano';
+				document.getElementById('chime-bpm').value = '120';
+			}
+			change_bpm_by(0);
+		}
+	
 	}
 }
 
