@@ -378,12 +378,24 @@ a {
 	padding-right: 20%;
 	margin-right: auto;
 }
-.play_btn {
+.icon_btn {
 	font-family: "Times New Roman", Times, serif;
 	border: none;
 	background-color: transparent;
 	font-size: x-large;
 }
+.trash_btn svg{
+	color: var(--bs-danger);
+}
+.form-like button.like_btn.is_liked_by_user svg {
+	color: #fd3c8c;
+	fill: #fd3c8c;
+}
+.icon_btn svg:hover,
+.icon_btn svg:focus{
+	animation: pulse 1s infinite;
+}
+
 .shadow_divider {
 	height: 3rem;
 	border: solid rgba(0, 0, 0, 0.15);
@@ -450,39 +462,9 @@ a {
 	justify-content: space-between;
 	padding: 15px;
 }
-.play-btn {
-	font-size: 24px;
-}
 .info {
 	text-align: center;
 	flex: 1;
-}
-.like-count {
-	font-size: 18px;
-}
-.like_btn {
-	font-family: "Times New Roman", Times, serif;
-	border: none;
-	background-color: transparent;
-	font-size: x-large;
-}
-.form-like button.like_btn {
-	border-radius: 50%;
-}
-.form-like button.like_btn:hover,
-.form-like button.like_btn:focus {
-	background: none;
-}
-.form-like button.like_btn:hover {
-	animation: pulse 1s ease infinite;
-}
-.form-like button.like_btn.is_liked_by_user:hover,
-.form-like button.like_btn.is_liked_by_user:focus {
-	background: none;
-}
-.form-like button.like_btn.is_liked_by_user svg {
-	color: #fd3c8c;
-	fill: #fd3c8c;
 }
 .hide {
 	display: none;

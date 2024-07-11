@@ -20,7 +20,7 @@ $this->title = 'Chime Share';
             </div>
             <div class="col-lg-6">
                 <h1 class="display-5 fw-bold lh-1 mb-3 page_title">Chime Share</h1>
-                <p class="lead">ChimeShare is an online web project dedicated to making music accesible to everyone, with a social twist.</p>
+                <p class="lead"><?= Yii::t('app', 'ChimeShare is an online web project dedicated to making music accesible to everyone, with a social twist.') ?></p>
                 <!--<div class="d-grid gap-2 d-md-flex justify-content-md-start">
                     <button type="button" class="btn btn-outline-secondary btn-lg px-4">View your dashboard</button>
                 </div>-->

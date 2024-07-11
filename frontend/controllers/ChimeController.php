@@ -42,6 +42,18 @@ class ChimeController extends Controller
     }*/
 
     /**
+     * @inheritdoc
+     */
+    public function beforeAction($action)
+    {            
+        if ($action->id == 'update') {
+            $this->enableCsrfValidation = false;
+        }
+
+        return parent::beforeAction($action);
+    }
+
+    /**
      * listen/view chime.
      * @param $id
      * @return string
@@ -99,16 +111,16 @@ class ChimeController extends Controller
 
     /**
      * update chime.
-     * @param $id
+     * @param string $id
      * @return string|Response
      * @throws NotFoundHttpException
      */
     public function actionUpdate($id): Response|string
     {
         $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', 'The chime has been updated.');
-            $this->refresh();
+            $this->redirect(['user/chimes']);
         } else {
             Yii::$app->session->setFlash('error', 'There was an error saving the chime.');
         }
@@ -124,7 +136,7 @@ class ChimeController extends Controller
      * @return string
      * @throws NotFoundHttpException
      */
-    public function actionDelete($id): string
+    public function actionDelete($id)
     {
         $model = $this->findModel($id);
         if ($model->delete()) {
@@ -132,7 +144,7 @@ class ChimeController extends Controller
             Yii::$app->session->setFlash('success', 'The chime has been deleted.');
         }
 
-        $this->redirect(['chime/index']);
+        $this->redirect(['user/chimes']);
     }
 
     /**

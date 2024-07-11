@@ -19,6 +19,7 @@ return [
             'csrfCookie' => [
                 'httpOnly' => true,
                 'path' => '',
+                'secure' => false,
             ],
         ],
         'user' => [

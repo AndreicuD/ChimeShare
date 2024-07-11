@@ -46,7 +46,7 @@ $button_classes= "";
 <div id="bottom_settings" class="container mb-3 p-0 pt-3">
     <div class="btn-toolbar justify-content-between bottom_settings_bar" role="toolbar" aria-label="Bottom toolbar">
         <div class="btn-group me-auto" role="group">
-            <button class="btn btn-light play_btn" id="play_button" onclick="playMelody()">&#x25B6;</button>
+            <button class="icon_btn play_btn" id="play_button" onclick="playMelody()">&#x25B6;</button>
         </div>
         <div class="input-group pe-2">
             <button id="instrument_selector_button" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -69,13 +69,13 @@ $button_classes= "";
             <button onclick="change_bpm_by(1)" type="button" class="btn btn-light">+</button>
         </div>
         <div class="input-group pe-2">
-            <span class="input-group-text user-select-none" id="addon-wrapping">Volume</span>
+            <span class="input-group-text user-select-none" id="addon-wrapping"><?= Yii::t('app', 'Volume') ?></span>
             <input type="range" min="0" max="100" value="60" class="form-control" id="volume_slider" oninput="update_volume()">
             <span class="input-group-text user-select-none" id="volume_text">60</span>
         </div>
         <div class="btn-group ms-auto" id="save_delete_buttons" role="group">
-            <button onclick="openPopup('erase_popup')" class="btn btn-danger">Erase</button>
-            <button onclick="openPopup('save_popup')" type="button" class="btn btn-success">Save Melody</button>
+            <button onclick="openPopup('erase_popup')" class="btn btn-danger"><?= Yii::t('app', 'Clear') ?></button>
+            <button onclick="openPopup('save_popup')" type="button" class="btn btn-success"><?= Yii::t('app', 'Save Chime') ?></button>
         </div>
     </div>
 </div>
@@ -84,7 +84,7 @@ $button_classes= "";
 <div id="save_popup">
     <div class="overlay_opaque" onclick="closePopup('save_popup')"></div>
     <div class="popup">
-        <h1 class="page_title">Save Melody</h1>
+        <h1 class="page_title"><?= Yii::t('app', 'Save Chime') ?></h1>
         <?php $form = ActiveForm::begin(['id' => 'form-savechime', 'layout' => 'floating']); ?>
 
         <?= $form->errorSummary($model);?>
@@ -99,13 +99,13 @@ $button_classes= "";
         <div class="container text-center">
             <div class="row">
                 <div class="col">
-                    <button onclick="closePopup('save_popup')" type="button" class="btn btn-danger">Close</button>
+                    <button onclick="closePopup('save_popup')" type="button" class="btn btn-danger"><?= Yii::t('app', 'Close') ?></button>
                 </div>
                 <div class="col">
-                    <input type="reset" onclick="reset_char_left()" value="Reset" class="btn btn-warning"></input>
+                    <input type="reset" onclick="reset_char_left()" value="Reset" class="btn btn-warning">
                 </div>
                 <div class="col">
-                    <input type="submit" value="Save" class="btn btn-success"></input>
+                    <input type="submit" value="Save" class="btn btn-success">
                 </div>
             </div>
         </div>
@@ -116,20 +116,19 @@ $button_classes= "";
 <div id="erase_popup">
     <div class="overlay_opaque" onclick="closePopup('erase_popup')"></div>
     <div class="popup">
-        <h1 class="page_title">Erase Melody</h1>
-        <h2 class="page_title">
-            This will clear the entire board!
-            <br>
-            Are you sure you want to continue?
-        </h2>
+        <h1 class="page_title"><?= Yii::t('app', 'Erase board') ?></h1>
+        <h3 class="page_title">
+            <p><?= Yii::t('app', 'This will clear the entire board!') ?></p>
+            <p><?= Yii::t('app', 'Are you sure you want to continue?') ?></p>
+        </h3>
         <br>
         <div class="container text-center">
             <div class="row">
                 <div class="col">
-                    <button onclick="closePopup('erase_popup')" type="button" class="btn btn-danger">No</button>
+                    <button onclick="closePopup('erase_popup')" type="button" class="btn btn-danger"><?= Yii::t('app', 'No') ?></button>
                 </div>
                 <div class="col">
-                    <button onclick="erase_table()" type="button" class="btn btn-success">Yes</button>
+                    <button onclick="erase_table()" type="button" class="btn btn-success"><?= Yii::t('app', 'Yes') ?></button>
                 </div>
             </div>
         </div>

@@ -50,7 +50,7 @@ class Chime extends \yii\db\ActiveRecord
         return [
             [['user_id', 'title', 'instrument', 'bpm', 'content'], 'required', 'on' => 'default'],
             [['user_id', 'likes_count'], 'integer'],
-            [['public_id'], 'string', 'max' => 32],
+            [['public_id'], 'string', 'max' => 36],
             [['title', 'instrument', 'bpm'], 'string', 'max' => 254],
             [['public_id'], 'unique', 'on' => 'default'],
             [['active', 'public'], 'boolean', 'trueValue' => 1, 'falseValue' => 0],

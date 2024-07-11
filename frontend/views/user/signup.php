@@ -14,7 +14,7 @@ $this->title = Yii::t('app', 'Signup');
 <div class="site-signup">
     <h1 class="text-center" class="page_title"><?= Html::encode($this->title) ?></h1>
 
-    <p class="text-center">Please fill out the following fields to signup:</p>
+    <p class="text-center"><?= Yii::t('app', 'Please fill out the following fields to sign-up:') ?></p>
 
     <div class="row justify-content-center">
         <div class="col-lg-6">
@@ -24,7 +24,7 @@ $this->title = Yii::t('app', 'Signup');
                 <?= $form->field($model, 'password')->passwordInput()->label(Yii::t('app', 'Password')) ?>
 
                 <hr>
-                <p class="">This will form your username.</p>
+                <p><?= Yii::t('app', 'This will form your username.') ?></p>
 
                 <?= $form->field($model, 'firstname')->label(Yii::t('app', 'Firstname')) ?>
                 <?= $form->field($model, 'lastname')->label(Yii::t('app', 'Lastname')) ?>
