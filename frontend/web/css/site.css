@@ -331,9 +331,10 @@ a {
 	border-top: 1px solid #c4c4c4;
 	border-bottom: 1px solid #c4c4c4;
 }
+
+
 .cell {
 	padding: 0;
-	
 	margin: 0;
 	border-width: 1px 1px 0px 0px;
 	border-right-style: solid;
@@ -353,7 +354,6 @@ a {
 	border-radius: 10px;
 }
 .piano_key_black {
-
 	background-color: black;	
 }
 .piano_key_white {
@@ -371,6 +371,20 @@ a {
 	border-width: 0px 1px 1px 1px;
 	border-color: #c4c4c4;
 	border-style: solid;
+}
+@media(max-width:767px) {
+	#music_interface {
+		overflow-x: scroll;
+		margin: 0 calc(var(--bs-gutter-x) * -0.5)
+	}
+	#music_interface .row {
+		flex-flow: row;
+		width: 825px;
+	}
+	.cell {
+		display: table-cell;
+		width: 25px;
+	}
 }
 .piano_settings {
 	padding-left: 20%;

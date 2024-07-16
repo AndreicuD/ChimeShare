@@ -1,7 +1,7 @@
 <p align="center">
-    <!--<a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>-->
+    <a href="https://chime-share.com" target="_blank">
+        <img src="https://chime-share.com/frontend/web/img/logo-white.png" height="100px">
+    </a>
     <h1 align="center">ChimeShare Documentation</h1>
     <br>
 </p>

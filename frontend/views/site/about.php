@@ -10,9 +10,9 @@ $this->title = 'About';
 <class="site-about">
     <h1 style="text-align: center;" class="page_title"><?= Html::encode($this->title) ?></h1>
 
-    <h1 style="text-align:center;">🇷🇴</h1>
+    <h1 style="text-align:center;">🇷🇴 </h1>
     <div class="about-text" style="padding-left: 10%; padding-right:10%;">
-        <h3 style="text-align: center;">ChimeShare este un proiect web online care încearcă să facă muzica accesibilă pentru toată lumea, cu un twist social.</h3>
+        <h3 style="text-align: center;">ChimeShare este un proiect web online care încearcă să facă muzica accesibilă pentru toată lumea, <i>cu un twist social</i>.</h3>
         <br>
         <div style="text-align: justify;">
 
@@ -36,7 +36,7 @@ $this->title = 'About';
             <p id="aici">În prezent, proiectul este bazat pe framework-ul PHP <a href="https://www.yiiframework.com/" target="_blank">Yii</a> și
             biblioteca <a href="https://tonejs.github.io/" target="_blank">Tone.js</a> pentru sunete.</p>    
     
-            <p>Acest site a fost scris inițial doar în HTML, CSS, JavaScript și puțin PHP, asta fiind ceea ce știam, dar pe măsură ce timpul a trecut și au fost
+            <p>Acest site a fost scris inițial doar în HTML, CSS, JavaScript și puțin PHP, dar pe măsură ce timpul a trecut și au fost
             adăugate funcții noi, am realizat că acestea nu vor fi suficiente.</p>
     
             <p>Pasul logic următor a fost portarea proiectului pe un micro-framework PHP, <a href="http://limonade-php.github.io/" target="_blank">Limonade</a>, care

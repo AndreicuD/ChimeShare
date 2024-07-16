@@ -20,9 +20,9 @@ $black_keys = array("2", "4", "6", "9", "11", "14", "16", "18", "21", "23");
 $button_classes= "";
 ?>
 
-<div id="music_interface" class="">
+<div id="music_interface" class="button_interface">
     <?php for($i=1; $i<=$rows; $i++) { ?>
-        <div class="row justify-content-center">
+        <div class="row">
             <?php for($j=0; $j<=$cols; $j++) { ?>
                 <?php if($j==0) {
                     if(in_array($i, $black_keys)) {

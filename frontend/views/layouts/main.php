@@ -36,11 +36,11 @@ AppAsset::register($this);
         gyroControls: false,
         minHeight: 200.00,
         minWidth: 200.00,
-        highlightColor: 0xcaeefc,
+        highlightColor: 0xabe5fc,
         midtoneColor: 0xf0fafe,
         lowlightColor: 0xebebeb,
         baseColor: 0xfcfeff,
-        blurFactor: 0.73,
+        blurFactor: 0.5,
         speed: 3.00,
         zoom: 0.80
     })
