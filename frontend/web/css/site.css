@@ -318,6 +318,21 @@ a {
 .chime_title:hover {
 	text-decoration: none;
 }
+
+.hero-image {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.lead {
+	font-size: 2em;
+}
+@media(max-width: 767px) {
+	.lead {
+		font-size: 1.5em;
+	}
+}
+
 /**** music grid ****/
 .page_title {
 	padding: 20px;
@@ -331,8 +346,6 @@ a {
 	border-top: 1px solid #c4c4c4;
 	border-bottom: 1px solid #c4c4c4;
 }
-
-
 .cell {
 	padding: 0;
 	margin: 0;

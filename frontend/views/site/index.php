@@ -13,14 +13,14 @@ $this->registerJsFile('/js/melodyMaker.js', ['depends' => [\yii\web\JqueryAsset:
 $this->title = 'Chime Share';
 ?>
 <div class="site-index">
-    <div class="container my-3">
+    <div class="container my-3 hero">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-            <div class="col-10 col-sm-8 col-lg-6">
+            <div class="col-10 col-sm-8 col-lg-6 hero-image">
                 <img src="/img/screenshot-hero.png" class="d-block mx-lg-auto img-fluid img-thumbnail shadow-lg" alt="Hero Image" width="600" height="500" loading="lazy">
             </div>
             <div class="col-lg-6">
                 <h1 class="display-5 fw-bold lh-1 mb-3 page_title">Chime Share</h1>
-                <p class="lead"><?= Yii::t('app', 'ChimeShare is an online web project dedicated to making music accesible to everyone, with a social twist.') ?></p>
+                <p class="lead lh-1"><?= Yii::t('app', 'ChimeShare is an online web project dedicated to making music accesible to everyone, with a social twist.') ?></p>
                 <!--<div class="d-grid gap-2 d-md-flex justify-content-md-start">
                     <button type="button" class="btn btn-outline-secondary btn-lg px-4">View your dashboard</button>
                 </div>-->
@@ -93,6 +93,7 @@ $this->title = 'Chime Share';
             <p class='page_title' style="text-align: center;">For more chimes please visit <a href="/chime/index">this page</a>!</p>
         </div>
     </div>
+    <p class="small_gray_text" style="text-align: center;">The background was made using <a href="https://www.vantajs.com/?effect=fog">Vanta</a>. Check them out too!</p>
 </div>
 
 <?php
