@@ -50,7 +50,7 @@ $this->title = 'About';
     
             <p>Aici intervine <a href="https://tonejs.github.io/" target="_blank">Tone.js</a>. Această bibliotecă rezolvă problema polifoniei notelor
             și poate, de asemenea, să genereze sunete de instrumente pe loc. Acest lucru înseamnă că sunetele sunt create pe baza diferitelor variabile pe care le pot schimba ușor,
-            fără a fi nevoie să refac vreun fișier eu însumi. Astfel, în viitor pot fii adăugate funcții care permit utilizatorilor să-și creeze propriile
+            fără a fi nevoie să refac vreun fișier eu însumi. Astfel, în viitor pot fi adăugate funcții care permit utilizatorilor să-și creeze propriile
             instrumente sau să facă sample-uri la diferite sunete de-ale lor.</p>
     
             <p>Pentru ca această schimbare să fie posibilă, am rescris, pentru a treia oară, întregul backend pentru pagina <b>Chime Maker</b>, schimbând modul în care notele sunt

@@ -39,7 +39,6 @@ var chime_action = 'edit';
 //-----------------------------------------------------------------------------------
 
 const now = Tone.now();
-const vol = new Tone.Volume(-16).toDestination();	
 
 const piano = new Tone.Sampler({
 	urls: {
@@ -54,7 +53,7 @@ const piano = new Tone.Sampler({
 	},
 	release : 1,
 	baseUrl : '/sounds/',
-}).connect(vol).toDestination();
+}).toDestination();
 const nylon_guitar = new Tone.Sampler({
 	urls: {
 		C4 : 'nylon_guitar/C4.mp3',
@@ -68,7 +67,7 @@ const nylon_guitar = new Tone.Sampler({
 	},
 	release : 1,
 	baseUrl : '/sounds/',
-}).connect(vol).toDestination();
+}).toDestination();
 const steel_guitar = new Tone.Sampler({
 	urls: {
 		C4 : 'steel_guitar/C4.mp3',
@@ -82,13 +81,11 @@ const steel_guitar = new Tone.Sampler({
 	},
 	release : 1,
 	baseUrl : '/sounds/',
-}).connect(vol).toDestination();
+}).toDestination();
 
 function playNote(instrument, note, duration) {
-	console.log(note);
+	//console.log(note);
 	let chosen_instrument = piano;
-	console.log(volume);
-	chosen_instrument.volume.value = volume;
 	
 	switch (instrument) {
 		case 'am_synth':
@@ -129,16 +126,16 @@ function playNote(instrument, note, duration) {
 						"releaseCurve": "exponential",
 						"sustain": 1
 					}
-				}).connect(vol).toDestination();
+				}).toDestination();
 			break;
 		case 'fm_synth':
-			chosen_instrument = new Tone.FMSynth().connect(vol).toDestination();
+			chosen_instrument = new Tone.FMSynth().toDestination();
 			break;
 		case 'dual_synth':
-			chosen_instrument = new Tone.DuoSynth().connect(vol).toDestination();
+			chosen_instrument = new Tone.DuoSynth().toDestination();
 			break;
 		case 'test_synth':
-			chosen_instrument = new Tone.PluckSynth().connect(vol).toDestination();
+			chosen_instrument = new Tone.PluckSynth().toDestination();
 			break;
 		case 'nylon_guitar':
 			chosen_instrument = nylon_guitar;
@@ -150,6 +147,7 @@ function playNote(instrument, note, duration) {
 			chosen_instrument = piano;
 			break;
 	}
+	chosen_instrument.volume.value = volume;
 	chosen_instrument.triggerAttackRelease(note_array.get(note), note_durations.get(duration));
 }
 

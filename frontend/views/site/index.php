@@ -93,7 +93,7 @@ $this->title = 'Chime Share';
             <p class='page_title' style="text-align: center;">For more chimes please visit <a href="/chime/index">this page</a>!</p>
         </div>
     </div>
-    <p class="small_gray_text" style="text-align: center;">The background was made using <a href="https://www.vantajs.com/?effect=fog">Vanta</a>. Check them out too!</p>
+    <p class="small_gray_text" style="text-align: center;">The background was made using <a target="_blank" href="https://www.vantajs.com/?effect=fog">Vanta</a>. Check them out too!</p>
 </div>
 
 <?php
@@ -114,8 +114,9 @@ $(document).ready(function () {
                     $('button.like_btn[data-chime="'+public_id+'"]').each(function(){
                         $(this).toggleClass('is_liked_by_user');
                     });
-                    $('p.like-count[data-chime="'+public_id+'"] > span').each(function(){
+                    $('p.like-count[data-chime="'+public_id+'"] > strong > span').each(function(){
                         $(this).html(data.likes_count);
+                        //console.dir(data.likes_count);
                     });
                 }
             }
