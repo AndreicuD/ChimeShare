@@ -470,6 +470,7 @@ a {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	z-index: 999;
+	border-radius: 10px;
 }
 .overlay_opaque {
 	display: none;
