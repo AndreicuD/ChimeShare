@@ -134,9 +134,6 @@ function playNote(instrument, note, duration) {
 		case 'dual_synth':
 			chosen_instrument = new Tone.DuoSynth().toDestination();
 			break;
-		case 'test_synth':
-			chosen_instrument = new Tone.PluckSynth().toDestination();
-			break;
 		case 'nylon_guitar':
 			chosen_instrument = nylon_guitar;
 			break;

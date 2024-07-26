@@ -59,7 +59,6 @@ $button_classes= "";
                 <li><a id="dual_synth_drop" class="dropdown-item user-select-none" onclick="change_instrument('dual_synth')">Dual Synth</a></li>
                 <li><a id="fm_synth_drop" class="dropdown-item user-select-none" onclick="change_instrument('fm_synth')">FM Synth</a></li>
                 <li><a id="am_synth_drop" class="dropdown-item user-select-none" onclick="change_instrument('am_synth')">AM Synth</a></li>
-                <li><a id="test_synth_drop" class="dropdown-item user-select-none" onclick="change_instrument('test_synth')">Test Synth</a></li>
             </ul>
         </div>
         <div class="input-group pe-2" role="group">

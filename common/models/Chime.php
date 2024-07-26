@@ -242,7 +242,6 @@ class Chime extends \yii\db\ActiveRecord
             'fm_synth' => Yii::t('app', 'FM Synth'),
             'am_synth' => Yii::t('app', 'AM Synth'),
             'fat_osc' => Yii::t('app', 'Fat Oscillator'),
-            'test_synth' => Yii::t('app', 'Test Synth'),
             'nylon_guitar' => Yii::t('app', 'Nylon Guitar'),
             'steel_guitar' => Yii::t('app', 'Steel Guitar'),
         ];
