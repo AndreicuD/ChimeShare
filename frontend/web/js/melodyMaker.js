@@ -256,18 +256,18 @@ var chime_pointer = 0;
 var bpm = 120;
 var time_sign = 4; // aka 4/4
 
-function clear_piano_note(note) {
+function clear_left_piano_note(note) {
 	var piano_note = document.getElementById('c0r' + note);
 	//console.log(piano_note);
 	piano_note.className = piano_note.className.replace(' played_col', '');
 }
 
-function play_piano_note(note, duration) {
+function play_left_piano_note(note, duration) {
 	var piano_note = document.getElementById('c0r' + note);
 	piano_note.className += " played_col";
 	var note_speed = 1000 * 60 / (bpm * time_sign);
 	note_speed *= duration*8;
-	setTimeout(clear_piano_note.bind(null, note), parseInt(note_speed));
+	setTimeout(clear_left_piano_note.bind(null, note), parseInt(note_speed));
 }
 
 function add_played_col_class_to(col) {
@@ -315,7 +315,7 @@ function check_and_play_col(playback_pointer) {
 			row=r_split[1];
 			col = parseInt(col);
 			row = parseInt(row);
-			play_piano_note(row, chime[chime_pointer][note].duration / 4);
+			play_left_piano_note(row, chime[chime_pointer][note].duration / 4);
 			playNote(instrument, row, chime[chime_pointer][note].duration / 4)
 		}
 		if( (chime_pointer+1) != chime.length ) {
@@ -326,6 +326,8 @@ function check_and_play_col(playback_pointer) {
 
 function playMelody() {
 	var play_button = document.getElementById('play_button');
+
+	if(chime[chime_pointer] == null) return;
 
 	var note_speed = 1000 * 60 / (bpm * time_sign);
 	if (!chime_playing) {
