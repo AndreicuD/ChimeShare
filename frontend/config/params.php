@@ -1,4 +1,4 @@
 <?php
 return [
-    'adminEmail' => 'site@chime-share.com',
+    'adminEmail' => 'site@darkened-hub.com',
 ];

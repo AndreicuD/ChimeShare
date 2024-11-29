@@ -7,8 +7,8 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'chime-backend',
-    'name' => 'Backend Chime Share',
+    'id' => 'hub-backend',
+    'name' => 'Backend Darkened Hub',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
@@ -33,7 +33,7 @@ return [
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend
-            'name' => 'chime-backend',
+            'name' => 'hub-backend',
             'cookieParams' => [
                 'path' => '/admin',
             ],

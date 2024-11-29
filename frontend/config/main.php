@@ -7,8 +7,8 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'chime-frontend',
-    'name' => 'Chime Share',
+    'id' => 'hub-frontend',
+    'name' => 'Darkened Hub',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
@@ -29,7 +29,7 @@ return [
             'loginUrl' => ['user/login'],
         ],
         'session' => [
-            'name' => 'chime-frontend',
+            'name' => 'hub-frontend',
         ],
         'log' => [
             'traceLevel' => /*YII_DEBUG ? 3 :*/ 0,
@@ -52,8 +52,7 @@ return [
                 '/' => 'site/index',
                 'about' => 'site/about',
                 'contact' => 'site/contact',
-                'chimes' => 'chime/index',
-                'chimes/<instrument:\w+>' => 'chime/index',
+                'songs' => 'song/index',
             ],
             'normalizer' => [
                 'class' => 'yii\web\UrlNormalizer',

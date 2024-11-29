@@ -2,7 +2,7 @@
 
 /** @var yii\web\View $this */
 
-$this->title = 'Admin Chime Share';
+$this->title = 'Admin Darkened Hub';
 ?>
 <div class="site-index">
 

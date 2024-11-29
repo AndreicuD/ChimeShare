@@ -16,49 +16,31 @@ $this->title = 'All chimes';
 ?>
 <div class="chime-index">
     <h1 style="text-align: center;" class="page_title"><?= Yii::t('app', 'All Chimes'); ?></h1>
-    <div class="container my-3">
-        <div class="row mb-3">
-
-            <div class="col-6">
-                <div class="input-group pe-2">
-                    <button id="instrument_selector_button" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <?= $searchModel::instrumentList()[$searchModel->instrument] ?? Yii::t('app', 'Instrument'); ?>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><?=Html::a(Yii::t('app', 'See all'), ['chime/index'], ['class' => 'dropdown-item user-select-none']); ?></li>
-                        <?php foreach($searchModel::instrumentList() as $instrument => $instrument_name) { ?>
-                            <li><?=Html::a($instrument_name, Url::to(['chime/index']).'/'.$instrument, ['class' => 'dropdown-item user-select-none']); ?></li>
-                        <?php } ?>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <?= ListView::widget([
-                'dataProvider' => $dataProvider,
-                'itemView' => '_item',
-                'viewParams' => ['modelLike'=> $modelLike, 'where' => 'my_chimes'],
-                'options' => [
-                    'tag' => 'div',
-                    'class' => 'list-wrapper row',
-                ],
-                'itemOptions' => [
-                    'tag' => 'div',
-                    'class' => 'col-12 col-md-6 col-lg-4',
-                ],
-                'layout' => '{items}{pager}',
-                'pager' => [
-                    'pageCssClass' => 'page-item',
-                    'prevPageCssClass' => 'prev page-item',
-                    'nextPageCssClass' => 'next page-item',
-                    'firstPageCssClass' => 'first page-item',
-                    'lastPageCssClass' => 'last page-item',
-                    'linkOptions' => ['class' => 'page-link'],
-                    'disabledListItemSubTagOptions' => ['class' => 'page-link'],
-                    'options' => ['class' => 'pagination justify-content-center'],
-                ],
-            ]); ?>
-        </div>
+    <div class="col-12">
+        <?= ListView::widget([
+            'dataProvider' => $dataProvider,
+            'itemView' => '_item',
+            'viewParams' => ['modelLike'=> $modelLike, 'where' => 'my_chimes'],
+            'options' => [
+                'tag' => 'div',
+                'class' => 'list-wrapper row',
+            ],
+            'itemOptions' => [
+                'tag' => 'div',
+                'class' => 'col-12 col-md-6 col-lg-4',
+            ],
+            'layout' => '{items}{pager}',
+            'pager' => [
+                'pageCssClass' => 'page-item',
+                'prevPageCssClass' => 'prev page-item',
+                'nextPageCssClass' => 'next page-item',
+                'firstPageCssClass' => 'first page-item',
+                'lastPageCssClass' => 'last page-item',
+                'linkOptions' => ['class' => 'page-link'],
+                'disabledListItemSubTagOptions' => ['class' => 'page-link'],
+                'options' => ['class' => 'pagination justify-content-center'],
+            ],
+        ]); ?>
     </div>
 </div>
 
