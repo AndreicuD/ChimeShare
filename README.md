@@ -63,7 +63,7 @@ implementarea lui a însemnat o rescriere a întregului site și a modului în c
 <h2>Documentație și tehnologii</h2>
 
 <p>Mai multe informații despre tehnologiile utilizate pot fi găsite în 
-<a href="https://github.com/AndreicuD/ChimeShare/blob/main/docs/documentation.md" target="_blank">documentație</a>.</p>
+<a href="https://github.com/AndreicuD/ChimeShare/blob/main/docs/ChimeShare-2.pdf" target="_blank">documentație</a>.</p>
 
 ------------------------------
 
@@ -118,4 +118,4 @@ lot of things I need to learn. </p>
 <h2>Documentation and technologies</h2>
 
 <p>More information about the technologies used can be found on 
-the <a href="https://github.com/AndreicuD/ChimeShare/blob/main/docs/documentation.md" target="_blank">documentation</a>.</p>
+the <a href="https://github.com/AndreicuD/ChimeShare/blob/main/docs/ChimeShare-2.pdf" target="_blank">documentation</a>.</p>
