@@ -1,6 +1,11 @@
+<h1 align="center">WARNING, old project not mantained anymore! </h1>
+
+<img width="2560" height="1327" alt="image" src="https://github.com/user-attachments/assets/5c9ec4f7-6138-4e66-9f8a-4c84f8a3b5f9" />
+<img width="2560" height="1327" alt="image" src="https://github.com/user-attachments/assets/f1e9043c-8fa2-4507-9838-119b4f84a65e" />
+
 <p align="center">
     <a href="https://chime-share.com" target="_blank">
-        <img src="https://chime-share.com/frontend/web/img/logo-white.png" height="100px">
+        <img src="https://chime-share.flexi-design.ro/frontend/web/img/logo-orig.png" height="100px">
     </a>
     <h1 align="center">Chime Share</h1>
     <br>
