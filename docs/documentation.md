@@ -108,7 +108,7 @@ notelor cântate. Astfel, acest obiect poate fi foarte usor salvat sub forma <b>
 
 Fiecărei melodii îi este atribuită pe lângă lucrurile de bază (nume și autor) și un id public, diferit față de cel din baza de date. Acest lucru permite
 deschiderea pentru ascultarea melodiilor altor persoane pe baza unui simplu link, care poate fi distribuit ușor și care va conține acel id public in structura lui.
-Ex: [https://chime-share.com/chime/listen?id=548fd187-1945-11ef-b1cc-309c233d53c1](https://chime-share.com/chime/listen?id=548fd187-1945-11ef-b1cc-309c233d53c1)
+Ex: [https://chime-share.flexi-design.ro/chime/listen?id=548fd187-1945-11ef-b1cc-309c233d53c1](https://chime-share.flexi-design.ro/chime/listen?id=548fd187-1945-11ef-b1cc-309c233d53c1)
 
 În plus, fiecare melodie publică are de asemenea și un contor de like-uri, lucru care permite formarea acelei liste cu cele mai bune melodii pe care o găsim pe prima pagină
 și care aduce elemente asemănătoare unui 'social media' pe platformă.
